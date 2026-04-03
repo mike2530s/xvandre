@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="description" content="Invitación a los XV años de Andrea – 16 de Mayo, 3:00 PM. ¡Acompáñanos a celebrar este momento tan especial!" />
+  <title>XV Años – Andrea 🌸</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --purple-deep:    #6B2D6B;
+      --purple-mid:     #8B4A8B;
+      --purple-light:   #C39BC3;
+      --purple-pale:    #E8D5E8;
+      --rose-dark:      #7B2D5E;
+      --gold:           #C9A96E;
+      --text-dark:      #4A1F4A;
+      --text-body:      #5C3A5C;
+      --text-light:     #7A5C7A;
+      --bg-top:         #e8d5f0;
+      --bg-bottom:      #c8e8f0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #dce8f5;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* ===== CARD ===== */
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      min-height: 100vh;
+      background: linear-gradient(
+        180deg,
+        #f0e8fa 0%,
+        #e8d8f4 8%,
+        #dfd0ef 16%,
+        #d5cce8 24%,
+        #ccd5e8 34%,
+        #c5dced 45%,
+        #bce0f0 56%,
+        #c8e8f5 68%,
+        #d0eef8 80%,
+        #d8f0f8 92%,
+        #e0f4fa 100%
+      );
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(107, 45, 107, 0.18), 0 0 120px rgba(107, 45, 107, 0.08);
+      /* isolation needed for mix-blend-mode to work correctly */
+      isolation: isolate;
+    }
+
+    /* ===== WATERCOLOR OVERLAY ===== */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 30% at 20% 10%, rgba(200, 160, 220, 0.35) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 20% at 80% 15%, rgba(180, 140, 200, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 25% at 50% 45%, rgba(160, 190, 220, 0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 30% at 25% 75%, rgba(140, 180, 220, 0.25) 0%, transparent 55%),
+        radial-gradient(ellipse 60% 25% at 75% 85%, rgba(160, 200, 230, 0.2) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== FLORAL BORDERS ===== */
+    .floral-border {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      line-height: 0;
+      overflow: visible;
+      height: 200px;
+      pointer-events: none;
+      /* transform-origin so animation pivots from center */
+      transform-origin: center top;
+    }
+
+    .floral-border img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: top center;
+      /* ✨ Se usa drop-shadow suave porque la imagen ya no tiene fondo */
+      filter: drop-shadow(0 8px 16px rgba(107, 45, 107, 0.15));
+      transform-origin: center top;
+      will-change: transform;
+    }
+
+    .floral-border-bottom img {
+      transform: rotate(180deg) scaleX(-1);
+      object-position: top center;
+      transform-origin: center center;
+    }
+
+    /* CSS keyframe animations for flower movement */
+    @keyframes floral-float {
+      0%   { transform: translateY(0px) scaleX(1);    }
+      25%  { transform: translateY(-6px) scaleX(1.01); }
+      50%  { transform: translateY(-3px) scaleX(0.995); }
+      75%  { transform: translateY(-8px) scaleX(1.008); }
+      100% { transform: translateY(0px) scaleX(1);    }
+    }
+
+    @keyframes floral-sway {
+      0%   { transform: translateX(0px) rotate(0deg) scaleY(1); }
+      20%  { transform: translateX(4px)  rotate(0.4deg) scaleY(1.005); }
+      50%  { transform: translateX(-3px) rotate(-0.3deg) scaleY(0.998); }
+      80%  { transform: translateX(5px)  rotate(0.5deg) scaleY(1.004); }
+      100% { transform: translateX(0px) rotate(0deg) scaleY(1); }
+    }
+
+    @keyframes floral-breathe {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.015); }
+    }
+
+
+    /* GSAP maneja todas las animaciones de flores — no hay CSS animation aquí */
+    /* Las animaciones de float/sway están en el script con repeat:-1 yoyo:true */
+
+    /* ===== CONTENT WRAPPER ===== */
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 10px 28px 30px;
+      text-align: center;
+    }
+
+    /* ===== ANDREA HEADING ===== */
+    .name-andrea {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(68px, 20vw, 88px);
+      color: var(--purple-deep);
+      line-height: 1.05;
+      margin-top: 4px;
+      margin-bottom: -6px;
+      text-shadow: 2px 3px 12px rgba(107, 45, 107, 0.18);
+      letter-spacing: 2px;
+    }
+
+    .subtitle-xv {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(17px, 5vw, 21px);
+      color: var(--purple-mid);
+      letter-spacing: 3px;
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    /* ===== DATE BLOCK ===== */
+    .date-block {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 24px;
+      padding: 14px 0;
+    }
+
+    .date-side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 28px;
+    }
+
+    .date-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 14vw, 68px);
+      color: var(--text-dark);
+      line-height: 1;
+      font-weight: 400;
+      letter-spacing: -1px;
+    }
+
+    .date-month {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-body);
+      font-weight: 500;
+      margin-top: 2px;
+    }
+
+    .date-divider {
+      width: 1.5px;
+      height: 64px;
+      background: linear-gradient(180deg, transparent, var(--purple-mid) 30%, var(--purple-mid) 70%, transparent);
+    }
+
+    .time-block {
+      padding: 0 28px;
+    }
+
+    .time-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 10vw, 48px);
+      color: var(--text-dark);
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .ornament-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 8px auto 20px;
+      max-width: 260px;
+    }
+
+    .ornament-divider::before,
+    .ornament-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--purple-light));
+    }
+
+    .ornament-divider::after {
+      background: linear-gradient(90deg, var(--purple-light), transparent);
+    }
+
+    .ornament-diamond {
+      width: 6px;
+      height: 6px;
+      background: var(--purple-light);
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    /* ===== MISA SECTION ===== */
+    .misa-section {
+      margin-bottom: 26px;
+      padding: 0 8px;
+    }
+
+    .event-label {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(16px, 4.5vw, 19px);
+      color: var(--text-body);
+      font-weight: 400;
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+
+    .location-link {
+      display: inline-block;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(15px, 4.2vw, 18px);
+      color: var(--purple-deep);
+      text-decoration: underline;
+      text-decoration-color: rgba(107, 45, 107, 0.5);
+      text-underline-offset: 3px;
+      cursor: pointer;
+      transition: color 0.25s ease, text-decoration-color 0.25s ease;
+      font-weight: 400;
+    }
+
+    .location-link:hover {
+      color: var(--rose-dark);
+      text-decoration-color: var(--rose-dark);
+    }
+
+    /* ===== FAMILIES ===== */
+    .families-section {
+      margin-bottom: 18px;
+    }
+
+    .family-role {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(28px, 8vw, 36px);
+      color: var(--purple-mid);
+      line-height: 1.2;
+      margin-bottom: 2px;
+    }
+
+    .family-names {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(19px, 5.5vw, 24px);
+      color: var(--text-dark);
+      font-weight: 400;
+      margin-bottom: 14px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ===== FULL DIVIDER ===== */
+    .full-divider {
+      width: 70%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, var(--purple-mid) 30%, var(--purple-mid) 70%, transparent);
+      margin: 16px auto 20px;
+    }
+
+    /* ===== ITINERARIO SECTION ===== */
+    .itinerario-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(13px, 3.5vw, 15px);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .itinerario-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .event-card {
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(195, 155, 195, 0.35);
+      border-radius: 18px;
+      padding: 22px 24px;
+      text-align: center;
+      box-shadow:
+        0 4px 20px rgba(107, 45, 107, 0.1),
+        0 1px 4px rgba(107, 45, 107, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .event-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-light), var(--purple-deep), var(--purple-light));
+    }
+
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .card-event-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(20px, 5.5vw, 24px);
+      color: var(--text-dark);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-time {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--purple-mid);
+      margin-bottom: 10px;
+    }
+
+    .card-address {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 4vw, 16px);
+      color: var(--text-body);
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-map {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-deep));
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(107, 45, 107, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-map:hover,
+    .btn-map:active {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(107, 45, 107, 0.45);
+      background: linear-gradient(135deg, var(--purple-deep), var(--rose-dark));
+    }
+
+    .btn-map svg {
+      width: 13px;
+      height: 13px;
+      fill: #fff;
+      flex-shrink: 0;
+    }
+
+    /* ===== COUNTDOWN ===== */
+    .countdown-wrapper {
+      margin: 8px 0 28px;
+    }
+
+    .countdown-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .count-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.5);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border: 1px solid rgba(195, 155, 195, 0.3);
+      border-radius: 14px;
+      padding: 14px 16px 10px;
+      min-width: 68px;
+      box-shadow: 0 2px 12px rgba(107, 45, 107, 0.08);
+    }
+
+    .count-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(26px, 7vw, 32px);
+      color: var(--purple-deep);
+      font-weight: 600;
+      line-height: 1;
+      min-width: 2ch;
+      text-align: center;
+    }
+
+    .count-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ===== RSVP FOOTER ===== */
+    .rsvp-section {
+      padding: 10px 0 32px;
+      text-align: center;
+    }
+
+    .rsvp-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(14px, 4vw, 16px);
+      color: var(--text-light);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .btn-rsvp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25d366, #1da851);
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn-rsvp:hover,
+    .btn-rsvp:active {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 10px 32px rgba(37, 211, 102, 0.45);
+    }
+
+    .btn-rsvp svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    /* ===== SPARKLE PARTICLES ===== */
+    .sparkles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(195, 155, 195, 0.6);
+      animation: twinkle var(--dur, 4s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0; transform: scale(0.5); }
+      50%       { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* ===== FLOATING HEARTS ===== */
+    .hearts-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart-float {
+      position: absolute;
+      font-size: 12px;
+      opacity: 0;
+      animation: floatUp var(--fup, 8s) ease-in infinite;
+      animation-delay: var(--fd, 0s);
+      color: rgba(180, 130, 180, 0.4);
+    }
+    @keyframes floatUp {
+      0%   { opacity: 0; transform: translateY(0) rotate(-10deg) scale(0.8); }
+      10%  { opacity: 0.5; }
+      80%  { opacity: 0.3; }
+      100% { opacity: 0; transform: translateY(-120vh) rotate(15deg) scale(1.1); }
+    }
+
+    /* ===== RECEPTION CARD ACCENT ===== */
+    .event-card.reception::before {
+      background: linear-gradient(90deg, var(--gold), var(--purple-deep), var(--gold));
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 481px) {
+      .card {
+        margin: 24px auto;
+        min-height: auto;
+        border-radius: 24px;
+      }
+      body {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+
+<div class="card" id="invitation-card">
+
+  <!-- Floating hearts background -->
+  <div class="hearts-bg" id="hearts-bg" aria-hidden="true"></div>
+
+  <!-- Sparkle particles -->
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+  <!-- ===== TOP FLORAL BORDER ===== -->
+  <div class="floral-border" id="border-top">
+    <img src="floressinfondo.png" alt="Flores decorativas" loading="eager" />
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="content">
+
+    <!-- NAME -->
+    <h1 class="name-andrea fade-up" id="name-andrea">Andrea</h1>
+    <p class="subtitle-xv fade-up" id="subtitle-xv">Mis XV años</p>
+
+    <!-- DATE & TIME -->
+    <div class="date-block fade-up" id="date-block">
+      <div class="date-side">
+        <span class="date-number">16</span>
+        <span class="date-month">Mayo</span>
+      </div>
+      <div class="date-divider"></div>
+      <div class="time-block">
+        <span class="time-number">3:00PM</span>
+      </div>
+    </div>
+
+    <!-- MISA -->
+    <div class="misa-section fade-up" id="misa-section">
+      <p class="event-label">Misa :Templo de la santa cruz.</p>
+      <a class="location-link"
+         id="map-misa"
+         href="https://maps.google.com/?q=Templo+de+la+Santa+Cruz,+Barrio+de+la+palmita"
+         target="_blank"
+         rel="noopener noreferrer"
+         aria-label="Ver ubicación de la Misa en Google Maps">
+        Barrio de la palmita
+      </a>
+    </div>
+
+    <div class="ornament-divider fade-up" id="ornament-1">
+      <div class="ornament-diamond"></div>
+    </div>
+
+    <!-- FAMILIES -->
+    <div class="families-section fade-up" id="families-section">
+      <p class="family-role">Mis papás</p>
+      <p class="family-names">Lupita y Miguel</p>
+      <p class="family-role">Mis padrinos</p>
+      <p class="family-names">Margarita y Eduardo</p>
+    </div>
+
+    <div class="full-divider"></div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-wrapper fade-up" id="countdown-wrapper">
+      <p class="countdown-label">Faltan</p>
+      <div class="countdown-grid" id="countdown-grid">
+        <div class="count-unit">
+          <span class="count-number" id="cd-days">--</span>
+          <span class="count-label">Días</span>
+        </div>
+        <div class="count-unit">
+          <span class="count-number" id="cd-hours">--</span>
+          <span class="count-label">Horas</span>
+        </div>
+        <div class="count-unit">
+          <span class="count-number" id="cd-mins">--</span>
+          <span class="count-label">Mins</span>
+        </div>
+        <div class="count-unit">
+          <span class="count-number" id="cd-secs">--</span>
+          <span class="count-label">Segs</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITINERARIO -->
+    <p class="itinerario-title fade-up" id="itinerario-title">✦ Itinerario ✦</p>
+
+    <div class="itinerario-cards" id="itinerario-cards">
+
+      <!-- MISA CARD -->
+      <div class="event-card" id="card-misa" role="article">
+        <span class="card-icon" aria-hidden="true">⛪</span>
+        <h2 class="card-event-name">Misa</h2>
+        <p class="card-time">3:00 PM</p>
+        <p class="card-address">Templo de la Santa Cruz<br/>Barrio de la palmita</p>
+        <a class="btn-map"
+           href="https://maps.google.com/?q=Templo+de+la+Santa+Cruz,+Barrio+de+la+palmita"
+           target="_blank"
+           rel="noopener noreferrer"
+           id="btn-map-misa"
+           aria-label="Ver ubicación de la Misa en Google Maps">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Ver Ubicación
+        </a>
+      </div>
+
+      <!-- RECEPCIÓN CARD -->
+      <div class="event-card reception" id="card-recepcion" role="article">
+        <span class="card-icon" aria-hidden="true">🎉</span>
+        <h2 class="card-event-name">Recepción</h2>
+        <p class="card-time">5:00 PM</p>
+        <p class="card-address">Alcocer, calle real #44</p>
+        <a class="btn-map"
+           href="https://maps.google.com/?q=Alcocer,+calle+real+44"
+           target="_blank"
+           rel="noopener noreferrer"
+           id="btn-map-recepcion"
+           aria-label="Ver ubicación de la Recepción en Google Maps">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+          </svg>
+          Ver Ubicación
+        </a>
+      </div>
+
+    </div>
+
+
+
+  </div><!-- /content -->
+
+  <!-- ===== BOTTOM FLORAL BORDER ===== -->
+  <div class="floral-border floral-border-bottom" id="border-bottom">
+    <img src="floressinfondo.png" alt="Flores decorativas" loading="lazy" width="100%" />
+  </div>
+
+</div><!-- /card -->
+
+<script>
+  // =============================================================
+  // GSAP — Professional Animation Sistema
+  // following gsap-core + gsap-timeline + gsap-scrolltrigger skills
+  // =============================================================
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ----- Set global defaults (skill best practice) -----
+  gsap.defaults({ ease: 'power3.out', overwrite: 'auto' });
+
+  // ---- Create sparkle particles ----
+  (function createSparkles() {
+    const container = document.getElementById('sparkles');
+    for (let i = 0; i < 18; i++) {
+      const el = document.createElement('div');
+      el.className = 'sparkle';
+      el.style.setProperty('--dur',   (3 + Math.random() * 5) + 's');
+      el.style.setProperty('--delay', (Math.random() * 5) + 's');
+      el.style.left   = (5 + Math.random() * 90) + '%';
+      el.style.top    = (5 + Math.random() * 90) + '%';
+      const s = 2 + Math.random() * 5;
+      el.style.width  = s + 'px';
+      el.style.height = s + 'px';
+      container.appendChild(el);
+    }
+  })();
+
+  // ---- Floating hearts ----
+  (function createHearts() {
+    const container = document.getElementById('hearts-bg');
+    const symbols   = ['♡', '❧', '✾', '✦', '♥'];
+    for (let i = 0; i < 10; i++) {
+      const el  = document.createElement('div');
+      el.className  = 'heart-float';
+      el.textContent = symbols[i % symbols.length];
+      el.style.setProperty('--fup', (6 + Math.random() * 8) + 's');
+      el.style.setProperty('--fd',  (Math.random() * 10) + 's');
+      el.style.left     = (5 + Math.random() * 90) + '%';
+      el.style.bottom   = '-20px';
+      el.style.fontSize = (10 + Math.random() * 10) + 'px';
+      container.appendChild(el);
+    }
+  })();
+
+  // =============================================================
+  // ENTRADA + ANIMACIONES — timeline GSAP profesional
+  // =============================================================
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motionOk = !prefersReduced;
+  const spd = motionOk ? 1 : 0; // multiplicador: 0 = skip animaciones
+
+  // ===========================================================
+  // 1. ENTRANCE — gsap.timeline() con fromTo() explícito
+  // fromTo() define inicio Y fin → nunca se queda invisible
+  // ===========================================================
+  const entranceTL = gsap.timeline({
+    defaults: { ease: 'power3.out', overwrite: 'auto' }
+  });
+
+  entranceTL
+    // Flores superiores — caen desde arriba
+    .fromTo('#border-top',
+      { y: -50, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
+      0
+    )
+    // "Andrea" — overshoot signature
+    .fromTo('#name-andrea',
+      { y: 28, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 1.1 || 0.01, ease: 'back.out(1.7)' },
+      spd * 0.3
+    )
+    .fromTo('#subtitle-xv',
+      { y: 18, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 0.8 || 0.01 },
+      '<0.25'
+    )
+    // 16 MAYO | 3:00PM — bounce suave
+    .fromTo('#date-block',
+      { y: 22, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 0.9 || 0.01, ease: 'back.out(1.4)' },
+      '<0.2'
+    )
+    .fromTo('#misa-section',
+      { y: 16, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 0.75 || 0.01 },
+      '<0.2'
+    )
+    // Línea divisora — crece horizontalmente
+    .fromTo('#ornament-1',
+      { scaleX: 0, autoAlpha: 0 },
+      { scaleX: 1, autoAlpha: 1, duration: spd * 0.5 || 0.01, ease: 'power2.inOut' },
+      '<0.15'
+    )
+    // Familia — stagger en cascada sobre cada hijo
+    .fromTo('#families-section > *',
+      { y: 14, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 0.65 || 0.01,
+        stagger: { each: spd * 0.12 || 0, from: 'start' } },
+      '<0.2'
+    )
+    // Countdown — escala + fade con stagger
+    .fromTo('.count-unit',
+      { y: 18, autoAlpha: 0, scale: 0.88 },
+      { y: 0, autoAlpha: 1, scale: 1, duration: spd * 0.6 || 0.01,
+        ease: 'back.out(1.6)', stagger: { each: spd * 0.08 || 0, from: 'start' } },
+      '<0.3'
+    )
+    .fromTo('#itinerario-title',
+      { y: 12, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 0.6 || 0.01 },
+      '<0.2'
+    )
+    // Borde de flores inferior — sube desde abajo
+    .fromTo('#border-bottom',
+      { y: 40, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
+      '<0.15'
+    );
+
+  // ===========================================================
+  // 2. ITINERARY CARDS — ScrollTrigger.batch()
+  // Agrupa las cards y aplica stagger sincronizado
+  // ===========================================================
+  ScrollTrigger.batch('.event-card', {
+    start: 'top 88%',
+    once: true,
+    onEnter: (elements) => {
+      gsap.fromTo(elements,
+        { y: 55, autoAlpha: 0, scale: 0.92 },
+        {
+          y: 0, autoAlpha: 1, scale: 1,
+          duration: motionOk ? 0.85 : 0.01,
+          ease: 'back.out(1.7)',
+          stagger: { each: 0.2, from: 'start' },
+        }
+      );
+    },
+  });
+
+
+
+  // ===========================================================
+  // 4. FLORES ANIMADAS — timelines con repeat:-1 yoyo:true
+  // Tres capas por borde: float vertical + sway + breathe
+  // ===========================================================
+  if (motionOk) {
+    // BORDE SUPERIOR
+    gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: 'sine.inOut' } })
+      .to('#border-top img', { y: -10, duration: 3.8 })
+      .to('#border-top img', { y:  -4, duration: 2.5 })
+      .to('#border-top img', { y: -12, duration: 4.2 });
+
+    gsap.timeline({ repeat: -1, yoyo: true, delay: 0.8, defaults: { ease: 'sine.inOut' } })
+      .to('#border-top img', { x: 10, rotation:  0.4, duration: 4.5 })
+      .to('#border-top img', { x: -6, rotation: -0.3, duration: 3.8 })
+      .to('#border-top img', { x:  8, rotation:  0.5, duration: 5.0 });
+
+    gsap.to('#border-top', {
+      scaleY: 1.04, duration: 4.5, ease: 'sine.inOut',
+      repeat: -1, yoyo: true, transformOrigin: 'top center', delay: 1,
+    });
+
+    // BORDE INFERIOR (fase desfasada para ritmo natural)
+    gsap.timeline({ repeat: -1, yoyo: true, delay: 1.5, defaults: { ease: 'sine.inOut' } })
+      .to('#border-bottom', { y:  8, duration: 4.0 })
+      .to('#border-bottom', { y:  3, duration: 2.8 })
+      .to('#border-bottom', { y: 10, duration: 4.8 });
+
+    gsap.timeline({ repeat: -1, yoyo: true, delay: 0.4, defaults: { ease: 'sine.inOut' } })
+      .to('#border-bottom img', { x:  -8, duration: 5.0 })
+      .to('#border-bottom img', { x:   5, duration: 3.5 })
+      .to('#border-bottom img', { x: -10, duration: 5.5 });
+
+    gsap.to('#border-bottom', {
+      scaleY: 1.04, duration: 5, ease: 'sine.inOut',
+      repeat: -1, yoyo: true, transformOrigin: 'bottom center', delay: 2,
+    });
+
+
+  }
+
+  // ===========================================================
+  // 5. HOVER en cards — solo desktop (pointer fino)
+  // ===========================================================
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.querySelectorAll('.event-card').forEach(card => {
+      card.addEventListener('mouseenter', () =>
+        gsap.to(card, { scale: 1.025, y: -3, duration: 0.22, ease: 'power2.out', overwrite: true })
+      );
+      card.addEventListener('mouseleave', () =>
+        gsap.to(card, { scale: 1, y: 0, duration: 0.22, ease: 'power2.inOut', overwrite: true })
+      );
+    });
+  }
+
+  // ===========================================================
+  // 7. COUNTDOWN TIMER — fuera de matchMedia (siempre corre)
+  // ===========================================================
+  function updateCountdown() {
+    const target = new Date('2026-05-16T15:00:00');
+    const diff   = target - new Date();
+
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach((id, i) =>
+        document.getElementById(id).textContent = i === 0 ? '¡Hoy!' : '🎉'
+      );
+      return;
+    }
+
+    const pad  = n => String(n).padStart(2, '0');
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
+
+    document.getElementById('cd-days').textContent  = days;
+    document.getElementById('cd-hours').textContent = pad(hours);
+    document.getElementById('cd-mins').textContent  = pad(mins);
+    document.getElementById('cd-secs').textContent  = pad(secs);
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+</body>
+</html>
