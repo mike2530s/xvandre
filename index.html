@@ -4,14 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <meta name="description" content="Invitación a los XV años de Andrea – 16 de Mayo, 3:00 PM. ¡Acompáñanos a celebrar este momento tan especial!" />
-  <title>XV Años – Andrea 🌸</title>
+  <title>XV Años – Andrea</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
@@ -75,7 +73,6 @@
       margin: 0 auto;
       overflow: hidden;
       box-shadow: 0 0 60px rgba(107, 45, 107, 0.18), 0 0 120px rgba(107, 45, 107, 0.08);
-      /* isolation needed for mix-blend-mode to work correctly */
       isolation: isolate;
     }
 
@@ -103,7 +100,6 @@
       overflow: visible;
       height: 200px;
       pointer-events: none;
-      /* transform-origin so animation pivots from center */
       transform-origin: center top;
     }
 
@@ -113,7 +109,6 @@
       display: block;
       object-fit: cover;
       object-position: top center;
-      /* ✨ Se usa drop-shadow suave porque la imagen ya no tiene fondo */
       filter: drop-shadow(0 8px 16px rgba(107, 45, 107, 0.15));
       transform-origin: center top;
       will-change: transform;
@@ -124,32 +119,6 @@
       object-position: top center;
       transform-origin: center center;
     }
-
-    /* CSS keyframe animations for flower movement */
-    @keyframes floral-float {
-      0%   { transform: translateY(0px) scaleX(1);    }
-      25%  { transform: translateY(-6px) scaleX(1.01); }
-      50%  { transform: translateY(-3px) scaleX(0.995); }
-      75%  { transform: translateY(-8px) scaleX(1.008); }
-      100% { transform: translateY(0px) scaleX(1);    }
-    }
-
-    @keyframes floral-sway {
-      0%   { transform: translateX(0px) rotate(0deg) scaleY(1); }
-      20%  { transform: translateX(4px)  rotate(0.4deg) scaleY(1.005); }
-      50%  { transform: translateX(-3px) rotate(-0.3deg) scaleY(0.998); }
-      80%  { transform: translateX(5px)  rotate(0.5deg) scaleY(1.004); }
-      100% { transform: translateX(0px) rotate(0deg) scaleY(1); }
-    }
-
-    @keyframes floral-breathe {
-      0%, 100% { transform: scale(1); }
-      50%       { transform: scale(1.015); }
-    }
-
-
-    /* GSAP maneja todas las animaciones de flores — no hay CSS animation aquí */
-    /* Las animaciones de float/sway están en el script con repeat:-1 yoyo:true */
 
     /* ===== CONTENT WRAPPER ===== */
     .content {
@@ -497,12 +466,77 @@
       font-weight: 500;
     }
 
-    /* ===== RSVP FOOTER ===== */
-    .rsvp-section {
-      padding: 10px 0 32px;
+    /* ===== GUESTBOOK ===== */
+    .guestbook-section {
+      padding: 20px 0;
+      margin-bottom: 20px;
       text-align: center;
     }
+    .guestbook-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(195, 155, 195, 0.4);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 16px rgba(107, 45, 107, 0.08);
+    }
+    .guestbook-form input[type="text"],
+    .guestbook-form textarea {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(195, 155, 195, 0.6);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--text-dark);
+      outline: none;
+    }
+    .guestbook-form input[type="text"]:focus,
+    .guestbook-form textarea:focus {
+      border-color: var(--purple-mid);
+    }
+    .btn-upload {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--purple-light);
+      color: var(--text-dark);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-upload svg { fill: var(--text-dark); }
+    .foto-status {
+      font-size: 11px;
+      color: var(--text-light);
+      margin-top: -8px;
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-deep));
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 14px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      margin-top: 8px;
+      box-shadow: 0 4px 12px rgba(107, 45, 107, 0.2);
+    }
 
+    /* ===== RSVP FOOTER ===== */
     .rsvp-text {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -510,38 +544,6 @@
       color: var(--text-light);
       margin-bottom: 16px;
       line-height: 1.5;
-    }
-
-    .btn-rsvp {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: linear-gradient(135deg, #25d366, #1da851);
-      color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 16px 36px;
-      border-radius: 50px;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.35);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn-rsvp:hover,
-    .btn-rsvp:active {
-      transform: translateY(-2px) scale(1.04);
-      box-shadow: 0 10px 32px rgba(37, 211, 102, 0.45);
-    }
-
-    .btn-rsvp svg {
-      width: 20px;
-      height: 20px;
-      fill: #fff;
     }
 
     /* ===== SPARKLE PARTICLES ===== */
@@ -614,29 +616,21 @@
 </head>
 <body>
 
-
-
 <div class="card" id="invitation-card">
 
-  <!-- Floating hearts background -->
   <div class="hearts-bg" id="hearts-bg" aria-hidden="true"></div>
 
-  <!-- Sparkle particles -->
   <div class="sparkles" id="sparkles" aria-hidden="true"></div>
 
-  <!-- ===== TOP FLORAL BORDER ===== -->
   <div class="floral-border" id="border-top">
     <img src="floressinfondo.png" alt="Flores decorativas" loading="eager" />
   </div>
 
-  <!-- ===== MAIN CONTENT ===== -->
   <div class="content">
 
-    <!-- NAME -->
     <h1 class="name-andrea fade-up" id="name-andrea">Andrea</h1>
     <p class="subtitle-xv fade-up" id="subtitle-xv">Mis XV años</p>
 
-    <!-- DATE & TIME -->
     <div class="date-block fade-up" id="date-block">
       <div class="date-side">
         <span class="date-number">16</span>
@@ -648,7 +642,6 @@
       </div>
     </div>
 
-    <!-- MISA -->
     <div class="misa-section fade-up" id="misa-section">
       <p class="event-label">Misa :Templo de la santa cruz.</p>
       <a class="location-link"
@@ -665,7 +658,6 @@
       <div class="ornament-diamond"></div>
     </div>
 
-    <!-- FAMILIES -->
     <div class="families-section fade-up" id="families-section">
       <p class="family-role">Mis papás</p>
       <p class="family-names">Lupita y Miguel</p>
@@ -675,7 +667,6 @@
 
     <div class="full-divider"></div>
 
-    <!-- COUNTDOWN -->
     <div class="countdown-wrapper fade-up" id="countdown-wrapper">
       <p class="countdown-label">Faltan</p>
       <div class="countdown-grid" id="countdown-grid">
@@ -698,12 +689,10 @@
       </div>
     </div>
 
-    <!-- ITINERARIO -->
     <p class="itinerario-title fade-up" id="itinerario-title">✦ Itinerario ✦</p>
 
     <div class="itinerario-cards" id="itinerario-cards">
 
-      <!-- MISA CARD -->
       <div class="event-card" id="card-misa" role="article">
         <span class="card-icon" aria-hidden="true">⛪</span>
         <h2 class="card-event-name">Misa</h2>
@@ -722,7 +711,6 @@
         </a>
       </div>
 
-      <!-- RECEPCIÓN CARD -->
       <div class="event-card reception" id="card-recepcion" role="article">
         <span class="card-icon" aria-hidden="true">🎉</span>
         <h2 class="card-event-name">Recepción</h2>
@@ -741,27 +729,37 @@
         </a>
       </div>
 
+    </div><div class="guestbook-section fade-up" id="guestbook-section">
+      <p class="itinerario-title">Libro de Firmas</p>
+      <p class="rsvp-text">Tómate una foto en la fiesta y déjale un mensaje a Andrea</p>
+      
+      <form id="form-firmas" class="guestbook-form">
+        <input type="text" id="gb-nombre" placeholder="Tu familia o nombre" required />
+        <textarea id="gb-mensaje" placeholder="Escribe tus felicitaciones aquí..." rows="3" required></textarea>
+        
+        <label for="gb-foto" class="btn-upload">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+            <path d="M4 4h3l2-2h6l2 2h3c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 3c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/>
+          </svg>
+          Tomar foto
+        </label>
+        <input type="file" id="gb-foto" accept="image/*" capture="environment" style="display: none;" required />
+        <span id="foto-nombre" class="foto-status">Ninguna foto seleccionada</span>
+
+        <button type="submit" class="btn-submit" id="btn-enviar-gb">Enviar Mensaje</button>
+      </form>
     </div>
 
-
-
-  </div><!-- /content -->
-
-  <!-- ===== BOTTOM FLORAL BORDER ===== -->
-  <div class="floral-border floral-border-bottom" id="border-bottom">
+  </div><div class="floral-border floral-border-bottom" id="border-bottom">
     <img src="floressinfondo.png" alt="Flores decorativas" loading="lazy" width="100%" />
   </div>
 
-</div><!-- /card -->
-
-<script>
+</div><script>
   // =============================================================
   // GSAP — Professional Animation Sistema
-  // following gsap-core + gsap-timeline + gsap-scrolltrigger skills
   // =============================================================
   gsap.registerPlugin(ScrollTrigger);
 
-  // ----- Set global defaults (skill best practice) -----
   gsap.defaults({ ease: 'power3.out', overwrite: 'auto' });
 
   // ---- Create sparkle particles ----
@@ -799,28 +797,22 @@
   })();
 
   // =============================================================
-  // ENTRADA + ANIMACIONES — timeline GSAP profesional
+  // ENTRADA + ANIMACIONES
   // =============================================================
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const motionOk = !prefersReduced;
-  const spd = motionOk ? 1 : 0; // multiplicador: 0 = skip animaciones
+  const spd = motionOk ? 1 : 0; 
 
-  // ===========================================================
-  // 1. ENTRANCE — gsap.timeline() con fromTo() explícito
-  // fromTo() define inicio Y fin → nunca se queda invisible
-  // ===========================================================
   const entranceTL = gsap.timeline({
     defaults: { ease: 'power3.out', overwrite: 'auto' }
   });
 
   entranceTL
-    // Flores superiores — caen desde arriba
     .fromTo('#border-top',
       { y: -50, autoAlpha: 0 },
       { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
       0
     )
-    // "Andrea" — overshoot signature
     .fromTo('#name-andrea',
       { y: 28, autoAlpha: 0 },
       { y: 0, autoAlpha: 1, duration: spd * 1.1 || 0.01, ease: 'back.out(1.7)' },
@@ -831,7 +823,6 @@
       { y: 0, autoAlpha: 1, duration: spd * 0.8 || 0.01 },
       '<0.25'
     )
-    // 16 MAYO | 3:00PM — bounce suave
     .fromTo('#date-block',
       { y: 22, autoAlpha: 0 },
       { y: 0, autoAlpha: 1, duration: spd * 0.9 || 0.01, ease: 'back.out(1.4)' },
@@ -842,20 +833,17 @@
       { y: 0, autoAlpha: 1, duration: spd * 0.75 || 0.01 },
       '<0.2'
     )
-    // Línea divisora — crece horizontalmente
     .fromTo('#ornament-1',
       { scaleX: 0, autoAlpha: 0 },
       { scaleX: 1, autoAlpha: 1, duration: spd * 0.5 || 0.01, ease: 'power2.inOut' },
       '<0.15'
     )
-    // Familia — stagger en cascada sobre cada hijo
     .fromTo('#families-section > *',
       { y: 14, autoAlpha: 0 },
       { y: 0, autoAlpha: 1, duration: spd * 0.65 || 0.01,
         stagger: { each: spd * 0.12 || 0, from: 'start' } },
       '<0.2'
     )
-    // Countdown — escala + fade con stagger
     .fromTo('.count-unit',
       { y: 18, autoAlpha: 0, scale: 0.88 },
       { y: 0, autoAlpha: 1, scale: 1, duration: spd * 0.6 || 0.01,
@@ -867,17 +855,13 @@
       { y: 0, autoAlpha: 1, duration: spd * 0.6 || 0.01 },
       '<0.2'
     )
-    // Borde de flores inferior — sube desde abajo
     .fromTo('#border-bottom',
       { y: 40, autoAlpha: 0 },
       { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
       '<0.15'
     );
 
-  // ===========================================================
-  // 2. ITINERARY CARDS — ScrollTrigger.batch()
-  // Agrupa las cards y aplica stagger sincronizado
-  // ===========================================================
+  // ITINERARY CARDS
   ScrollTrigger.batch('.event-card', {
     start: 'top 88%',
     once: true,
@@ -894,14 +878,8 @@
     },
   });
 
-
-
-  // ===========================================================
-  // 4. FLORES ANIMADAS — timelines con repeat:-1 yoyo:true
-  // Tres capas por borde: float vertical + sway + breathe
-  // ===========================================================
+  // FLORES ANIMADAS
   if (motionOk) {
-    // BORDE SUPERIOR
     gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: 'sine.inOut' } })
       .to('#border-top img', { y: -10, duration: 3.8 })
       .to('#border-top img', { y:  -4, duration: 2.5 })
@@ -917,7 +895,6 @@
       repeat: -1, yoyo: true, transformOrigin: 'top center', delay: 1,
     });
 
-    // BORDE INFERIOR (fase desfasada para ritmo natural)
     gsap.timeline({ repeat: -1, yoyo: true, delay: 1.5, defaults: { ease: 'sine.inOut' } })
       .to('#border-bottom', { y:  8, duration: 4.0 })
       .to('#border-bottom', { y:  3, duration: 2.8 })
@@ -932,13 +909,9 @@
       scaleY: 1.04, duration: 5, ease: 'sine.inOut',
       repeat: -1, yoyo: true, transformOrigin: 'bottom center', delay: 2,
     });
-
-
   }
 
-  // ===========================================================
-  // 5. HOVER en cards — solo desktop (pointer fino)
-  // ===========================================================
+  // HOVER CARDS
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     document.querySelectorAll('.event-card').forEach(card => {
       card.addEventListener('mouseenter', () =>
@@ -950,16 +923,14 @@
     });
   }
 
-  // ===========================================================
-  // 7. COUNTDOWN TIMER — fuera de matchMedia (siempre corre)
-  // ===========================================================
+  // COUNTDOWN
   function updateCountdown() {
     const target = new Date('2026-05-16T15:00:00');
     const diff   = target - new Date();
 
     if (diff <= 0) {
       ['cd-days','cd-hours','cd-mins','cd-secs'].forEach((id, i) =>
-        document.getElementById(id).textContent = i === 0 ? '¡Hoy!' : '🎉'
+        document.getElementById(id).textContent = i === 0 ? 'Hoy' : 'Listo'
       );
       return;
     }
@@ -978,6 +949,82 @@
 
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  // ===========================================================
+  // GUESTBOOK (LIBRO DE FIRMAS) LOGIC
+  // ===========================================================
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb50jg9yqQ_YWeEI5LndBMmbV-n6j7yjOPAkvCpe_nVEjemM-VbXQmQChvezumKdgB/exec";
+  const formFirmas = document.getElementById('form-firmas');
+  const fileInput = document.getElementById('gb-foto');
+  const statusTexto = document.getElementById('foto-nombre');
+  const btnEnviar = document.getElementById('btn-enviar-gb');
+
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files.length > 0) {
+      statusTexto.textContent = "Foto lista para enviar";
+      statusTexto.style.color = "green";
+    } else {
+      statusTexto.textContent = "Ninguna foto seleccionada";
+      statusTexto.style.color = "var(--text-light)";
+    }
+  });
+
+  const fileToBase64 = (file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+
+  formFirmas.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    btnEnviar.textContent = "Enviando...";
+    btnEnviar.disabled = true;
+
+    try {
+      const nombre = document.getElementById('gb-nombre').value;
+      const mensaje = document.getElementById('gb-mensaje').value;
+      let fotoBase64 = null;
+
+      if (fileInput.files.length > 0) {
+        fotoBase64 = await fileToBase64(fileInput.files[0]);
+      }
+
+      const data = { nombre, mensaje, fotoBase64 };
+
+      await fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      alert("Mensaje enviado correctamente. Gracias por compartir este momento.");
+      formFirmas.reset();
+      statusTexto.textContent = "Ninguna foto seleccionada";
+      statusTexto.style.color = "var(--text-light)";
+      
+    } catch (error) {
+      alert("Hubo un error al enviar. Por favor intenta de nuevo.");
+      console.error(error);
+    } finally {
+      btnEnviar.textContent = "Enviar Mensaje";
+      btnEnviar.disabled = false;
+    }
+  });
+  
+  if (window.gsap && window.ScrollTrigger) {
+    gsap.from('#guestbook-section', {
+      y: 40, autoAlpha: 0, duration: 0.8,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '#guestbook-section',
+        start: 'top 85%',
+        once: true,
+      }
+    });
+  }
 </script>
 </body>
 </html>
