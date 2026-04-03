@@ -7,6 +7,7 @@
   <meta name="description"
     content="Invitación a los XV años de Andrea – 16 de Mayo, 3:00 PM. ¡Acompáñanos a celebrar este momento tan especial!" />
   <title>XV Años – Andrea</title>
+  <meta name="theme-color" content="#c8b0e0" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1135,6 +1136,10 @@
     // ===========================================================
     // CONTROL DE TIEMPO DEL LIBRO DE FIRMAS
     // ===========================================================
+
+    // Declarada AQUÍ para que exista antes de cualquier llamada (evita Temporal Dead Zone)
+    let guestbookReady = false;
+
     function checkGuestbookStatus() {
       const lockedDiv = document.getElementById('gb-locked');
       const unlockedDiv = document.getElementById('gb-unlocked');
@@ -1155,14 +1160,9 @@
       }
     }
 
-    // Comprobar al cargar y cada minuto (por si alguien deja la página abierta)
-    checkGuestbookStatus();
-    setInterval(checkGuestbookStatus, 60000);
-
     // ===========================================================
     // GUESTBOOK (LIBRO DE FIRMAS) LOGIC — solo se activa al desbloquear
     // ===========================================================
-    let guestbookReady = false;
     function initGuestbookListeners() {
       if (guestbookReady) return;   // evitar registrar listeners duplicados
       guestbookReady = true;
@@ -1215,6 +1215,15 @@
           formFirmas.reset();
           statusTexto.textContent = "Ninguna foto seleccionada";
           statusTexto.style.color = "var(--text-light)";
+
+          // Refrescar el álbum si ya está visible
+          if (typeof cargarAlbum === 'function') {
+            const albumSection = document.getElementById('album-section');
+            if (albumSection && albumSection.style.display !== 'none') {
+              cargarAlbum();
+            }
+          }
+
         } catch (error) {
           alert("Hubo un error al enviar. Por favor intenta de nuevo.");
           console.error(error);
@@ -1236,6 +1245,10 @@
         }
       });
     }
+
+    // Llamadas AL FINAL, cuando ya están definidas todas las funciones
+    checkGuestbookStatus();
+    setInterval(checkGuestbookStatus, 60000);
 
     // ===========================================================
     // REVELADO DEL ÁLBUM (9:00 PM)
