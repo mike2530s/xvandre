@@ -1,38 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta name="description" content="Invitación a los XV años de Andrea – 16 de Mayo, 3:00 PM. ¡Acompáñanos a celebrar este momento tan especial!" />
+  <meta name="description"
+    content="Invitación a los XV años de Andrea – 16 de Mayo, 3:00 PM. ¡Acompáñanos a celebrar este momento tan especial!" />
   <title>XV Años – Andrea</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <style>
     /* ===== RESET & BASE ===== */
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
     :root {
-      --purple-deep:    #6B2D6B;
-      --purple-mid:     #8B4A8B;
-      --purple-light:   #C39BC3;
-      --purple-pale:    #E8D5E8;
-      --rose-dark:      #7B2D5E;
-      --gold:           #C9A96E;
-      --text-dark:      #4A1F4A;
-      --text-body:      #5C3A5C;
-      --text-light:     #7A5C7A;
-      --bg-top:         #e8d5f0;
-      --bg-bottom:      #c8e8f0;
+      --purple-deep: #6B2D6B;
+      --purple-mid: #8B4A8B;
+      --purple-light: #C39BC3;
+      --purple-pale: #E8D5E8;
+      --rose-dark: #7B2D5E;
+      --gold: #C9A96E;
+      --text-dark: #4A1F4A;
+      --text-body: #5C3A5C;
+      --text-light: #7A5C7A;
+      --bg-top: #e8d5f0;
+      --bg-bottom: #c8e8f0;
     }
 
     html {
@@ -56,20 +62,18 @@
       width: 100%;
       max-width: 480px;
       min-height: 100vh;
-      background: linear-gradient(
-        180deg,
-        #f0e8fa 0%,
-        #e8d8f4 8%,
-        #dfd0ef 16%,
-        #d5cce8 24%,
-        #ccd5e8 34%,
-        #c5dced 45%,
-        #bce0f0 56%,
-        #c8e8f5 68%,
-        #d0eef8 80%,
-        #d8f0f8 92%,
-        #e0f4fa 100%
-      );
+      background: linear-gradient(180deg,
+          #f0e8fa 0%,
+          #e8d8f4 8%,
+          #dfd0ef 16%,
+          #d5cce8 24%,
+          #ccd5e8 34%,
+          #c5dced 45%,
+          #bce0f0 56%,
+          #c8e8f5 68%,
+          #d0eef8 80%,
+          #d8f0f8 92%,
+          #e0f4fa 100%);
       margin: 0 auto;
       overflow: hidden;
       box-shadow: 0 0 60px rgba(107, 45, 107, 0.18), 0 0 120px rgba(107, 45, 107, 0.08);
@@ -472,6 +476,7 @@
       margin-bottom: 20px;
       text-align: center;
     }
+
     .guestbook-form {
       display: flex;
       flex-direction: column;
@@ -484,6 +489,7 @@
       padding: 20px;
       box-shadow: 0 4px 16px rgba(107, 45, 107, 0.08);
     }
+
     .guestbook-form input[type="text"],
     .guestbook-form textarea {
       font-family: 'Montserrat', sans-serif;
@@ -495,10 +501,12 @@
       color: var(--text-dark);
       outline: none;
     }
+
     .guestbook-form input[type="text"]:focus,
     .guestbook-form textarea:focus {
       border-color: var(--purple-mid);
     }
+
     .btn-upload {
       display: inline-flex;
       align-items: center;
@@ -514,12 +522,17 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    .btn-upload svg { fill: var(--text-dark); }
+
+    .btn-upload svg {
+      fill: var(--text-dark);
+    }
+
     .foto-status {
       font-size: 11px;
       color: var(--text-light);
       margin-top: -8px;
     }
+
     .btn-submit {
       background: linear-gradient(135deg, var(--purple-mid), var(--purple-deep));
       color: #fff;
@@ -548,17 +561,20 @@
       box-shadow: 0 4px 16px rgba(107, 45, 107, 0.05);
       transition: all 0.5s ease;
     }
+
     .lock-icon {
       color: var(--purple-mid);
       margin-bottom: 16px;
       opacity: 0.85;
     }
+
     .locked-title {
       font-family: 'Playfair Display', serif;
       font-size: 22px;
       color: var(--purple-deep);
       margin-bottom: 12px;
     }
+
     .locked-phrase {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
@@ -566,6 +582,85 @@
       color: var(--text-body);
       line-height: 1.6;
       padding: 0 10px;
+    }
+
+    /* ===== ÁLBUM DE RECUERDOS (POLAROID) ===== */
+    .album-section {
+      padding: 30px 10px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .polaroid {
+      background: #fff;
+      padding: 8px 8px 24px 8px;
+      box-shadow:
+        0 4px 12px rgba(107, 45, 107, 0.15),
+        0 1px 4px rgba(0, 0, 0, 0.08);
+      border-radius: 3px;
+      transform: rotate(-2deg);
+      transition: transform 0.3s cubic-bezier(.34, 1.56, .64, 1), box-shadow 0.3s ease;
+    }
+
+    .polaroid:nth-child(even) {
+      transform: rotate(2.5deg);
+    }
+
+    .polaroid:nth-child(3n) {
+      transform: rotate(-1deg);
+    }
+
+    .polaroid:hover {
+      transform: scale(1.08) rotate(0deg);
+      box-shadow: 0 12px 32px rgba(107, 45, 107, 0.25);
+      z-index: 10;
+      position: relative;
+    }
+
+    .polaroid img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      background: #eee;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .polaroid-text {
+      font-family: 'Great Vibes', cursive;
+      font-size: 17px;
+      color: var(--text-dark);
+      margin-top: 10px;
+      line-height: 1.2;
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+
+    .polaroid-author {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 8px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 5px;
+    }
+
+    .cargando-texto {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--text-light);
+      grid-column: 1 / -1;
+      padding: 20px 0;
     }
 
     /* ===== RSVP FOOTER ===== */
@@ -601,18 +696,31 @@
     }
 
     @keyframes twinkle {
-      0%, 100% { opacity: 0; transform: scale(0.5); }
-      50%       { opacity: 1; transform: scale(1.2); }
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
     }
 
     /* ===== FLOATING HEARTS ===== */
     .hearts-bg {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
     }
+
     .heart-float {
       position: absolute;
       font-size: 12px;
@@ -621,11 +729,25 @@
       animation-delay: var(--fd, 0s);
       color: rgba(180, 130, 180, 0.4);
     }
+
     @keyframes floatUp {
-      0%   { opacity: 0; transform: translateY(0) rotate(-10deg) scale(0.8); }
-      10%  { opacity: 0.5; }
-      80%  { opacity: 0.3; }
-      100% { opacity: 0; transform: translateY(-120vh) rotate(15deg) scale(1.1); }
+      0% {
+        opacity: 0;
+        transform: translateY(0) rotate(-10deg) scale(0.8);
+      }
+
+      10% {
+        opacity: 0.5;
+      }
+
+      80% {
+        opacity: 0.3;
+      }
+
+      100% {
+        opacity: 0;
+        transform: translateY(-120vh) rotate(15deg) scale(1.1);
+      }
     }
 
     /* ===== RECEPTION CARD ACCENT ===== */
@@ -640,466 +762,562 @@
         min-height: auto;
         border-radius: 24px;
       }
+
       body {
         padding: 20px;
       }
     }
   </style>
 </head>
+
 <body>
 
-<div class="card" id="invitation-card">
+  <div class="card" id="invitation-card">
 
-  <div class="hearts-bg" id="hearts-bg" aria-hidden="true"></div>
+    <div class="hearts-bg" id="hearts-bg" aria-hidden="true"></div>
 
-  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+    <div class="sparkles" id="sparkles" aria-hidden="true"></div>
 
-  <div class="floral-border" id="border-top">
-    <img src="floressinfondo.png" alt="Flores decorativas" loading="eager" />
-  </div>
-
-  <div class="content">
-
-    <h1 class="name-andrea fade-up" id="name-andrea">Andrea</h1>
-    <p class="subtitle-xv fade-up" id="subtitle-xv">Mis XV años</p>
-
-    <div class="date-block fade-up" id="date-block">
-      <div class="date-side">
-        <span class="date-number">16</span>
-        <span class="date-month">Mayo</span>
-      </div>
-      <div class="date-divider"></div>
-      <div class="time-block">
-        <span class="time-number">3:00PM</span>
-      </div>
+    <div class="floral-border" id="border-top">
+      <img src="floressinfondo.png" alt="Flores decorativas" loading="eager" />
     </div>
 
-    <div class="misa-section fade-up" id="misa-section">
-      <p class="event-label">Misa :Templo de la santa cruz.</p>
-      <a class="location-link"
-         id="map-misa"
-         href="https://maps.google.com/?q=Templo+de+la+Santa+Cruz,+Barrio+de+la+palmita"
-         target="_blank"
-         rel="noopener noreferrer"
-         aria-label="Ver ubicación de la Misa en Google Maps">
-        Barrio de la palmita
-      </a>
-    </div>
+    <div class="content">
 
-    <div class="ornament-divider fade-up" id="ornament-1">
-      <div class="ornament-diamond"></div>
-    </div>
+      <h1 class="name-andrea fade-up" id="name-andrea">Andrea</h1>
+      <p class="subtitle-xv fade-up" id="subtitle-xv">Mis XV años</p>
 
-    <div class="families-section fade-up" id="families-section">
-      <p class="family-role">Mis papás</p>
-      <p class="family-names">Lupita y Miguel</p>
-      <p class="family-role">Mis padrinos</p>
-      <p class="family-names">Margarita y Eduardo</p>
-    </div>
-
-    <div class="full-divider"></div>
-
-    <div class="countdown-wrapper fade-up" id="countdown-wrapper">
-      <p class="countdown-label">Faltan</p>
-      <div class="countdown-grid" id="countdown-grid">
-        <div class="count-unit">
-          <span class="count-number" id="cd-days">--</span>
-          <span class="count-label">Días</span>
+      <div class="date-block fade-up" id="date-block">
+        <div class="date-side">
+          <span class="date-number">16</span>
+          <span class="date-month">Mayo</span>
         </div>
-        <div class="count-unit">
-          <span class="count-number" id="cd-hours">--</span>
-          <span class="count-label">Horas</span>
-        </div>
-        <div class="count-unit">
-          <span class="count-number" id="cd-mins">--</span>
-          <span class="count-label">Mins</span>
-        </div>
-        <div class="count-unit">
-          <span class="count-number" id="cd-secs">--</span>
-          <span class="count-label">Segs</span>
+        <div class="date-divider"></div>
+        <div class="time-block">
+          <span class="time-number">3:00PM</span>
         </div>
       </div>
-    </div>
 
-    <p class="itinerario-title fade-up" id="itinerario-title">✦ Itinerario ✦</p>
-
-    <div class="itinerario-cards" id="itinerario-cards">
-
-      <div class="event-card" id="card-misa" role="article">
-        <span class="card-icon" aria-hidden="true">⛪</span>
-        <h2 class="card-event-name">Misa</h2>
-        <p class="card-time">3:00 PM</p>
-        <p class="card-address">Templo de la Santa Cruz<br/>Barrio de la palmita</p>
-        <a class="btn-map"
-           href="https://maps.google.com/?q=Templo+de+la+Santa+Cruz,+Barrio+de+la+palmita"
-           target="_blank"
-           rel="noopener noreferrer"
-           id="btn-map-misa"
-           aria-label="Ver ubicación de la Misa en Google Maps">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          Ver Ubicación
+      <div class="misa-section fade-up" id="misa-section">
+        <p class="event-label">Misa :Templo de la santa cruz.</p>
+        <a class="location-link" id="map-misa"
+          href="https://maps.google.com/?q=Templo+de+la+Santa+Cruz,+Barrio+de+la+palmita" target="_blank"
+          rel="noopener noreferrer" aria-label="Ver ubicación de la Misa en Google Maps">
+          Barrio de la palmita
         </a>
       </div>
 
-      <div class="event-card reception" id="card-recepcion" role="article">
-        <span class="card-icon" aria-hidden="true">🎉</span>
-        <h2 class="card-event-name">Recepción</h2>
-        <p class="card-time">5:00 PM</p>
-        <p class="card-address">Alcocer, calle real #44</p>
-        <a class="btn-map"
-           href="https://maps.app.goo.gl/Ux4d2Q52fRvwCPDu5"
-           target="_blank"
-           rel="noopener noreferrer"
-           id="btn-map-recepcion"
-           aria-label="Ver ubicación de la Recepción en Google Maps">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-          </svg>
-          Ver Ubicación
-        </a>
+      <div class="ornament-divider fade-up" id="ornament-1">
+        <div class="ornament-diamond"></div>
       </div>
 
-    </div>
-
-    <div class="guestbook-section fade-up" id="guestbook-section">
-      
-      <div id="gb-locked" class="gb-locked-state">
-        <svg viewBox="0 0 24 24" width="42" height="42" class="lock-icon">
-          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="currentColor"/>
-        </svg>
-        <h3 class="locked-title">Sorpresa en Espera</h3>
-        <p class="locked-phrase">"Los instantes más hermosos merecen ser capturados en el momento perfecto. Acompáñanos a la recepción a las 5:00 PM para revelar este espacio y dejar tu huella en nuestra historia."</p>
+      <div class="families-section fade-up" id="families-section">
+        <p class="family-role">Mis papás</p>
+        <p class="family-names">Lupita y Miguel</p>
+        <p class="family-role">Mis padrinos</p>
+        <p class="family-names">Margarita y Eduardo</p>
       </div>
 
-      <div id="gb-unlocked" class="gb-unlocked-state" style="display: none;">
-        <p class="itinerario-title">Libro de Firmas</p>
-        <p class="rsvp-text">Tómate una foto en la fiesta y déjale un mensaje a Andrea</p>
-        
-        <form id="form-firmas" class="guestbook-form">
-          <input type="text" id="gb-nombre" placeholder="Tu familia o nombre" required />
-          <textarea id="gb-mensaje" placeholder="Escribe tus felicitaciones aquí..." rows="3" required></textarea>
-          
-          <label for="gb-foto" class="btn-upload">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-              <path d="M4 4h3l2-2h6l2 2h3c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 3c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/>
+      <div class="full-divider"></div>
+
+      <div class="countdown-wrapper fade-up" id="countdown-wrapper">
+        <p class="countdown-label">Faltan</p>
+        <div class="countdown-grid" id="countdown-grid">
+          <div class="count-unit">
+            <span class="count-number" id="cd-days">--</span>
+            <span class="count-label">Días</span>
+          </div>
+          <div class="count-unit">
+            <span class="count-number" id="cd-hours">--</span>
+            <span class="count-label">Horas</span>
+          </div>
+          <div class="count-unit">
+            <span class="count-number" id="cd-mins">--</span>
+            <span class="count-label">Mins</span>
+          </div>
+          <div class="count-unit">
+            <span class="count-number" id="cd-secs">--</span>
+            <span class="count-label">Segs</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="itinerario-title fade-up" id="itinerario-title">✦ Itinerario ✦</p>
+
+      <div class="itinerario-cards" id="itinerario-cards">
+
+        <div class="event-card" id="card-misa" role="article">
+          <span class="card-icon" aria-hidden="true">⛪</span>
+          <h2 class="card-event-name">Misa</h2>
+          <p class="card-time">3:00 PM</p>
+          <p class="card-address">Templo de la Santa Cruz<br />Barrio de la palmita</p>
+          <a class="btn-map" href="https://maps.google.com/?q=Templo+de+la+Santa+Cruz,+Barrio+de+la+palmita"
+            target="_blank" rel="noopener noreferrer" id="btn-map-misa"
+            aria-label="Ver ubicación de la Misa en Google Maps">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
             </svg>
-            Tomar foto
-          </label>
-          <input type="file" id="gb-foto" accept="image/*" capture="environment" style="display: none;" required />
-          <span id="foto-nombre" class="foto-status">Ninguna foto seleccionada</span>
+            Ver Ubicación
+          </a>
+        </div>
 
-          <button type="submit" class="btn-submit" id="btn-enviar-gb">Enviar Mensaje</button>
-        </form>
+        <div class="event-card reception" id="card-recepcion" role="article">
+          <span class="card-icon" aria-hidden="true">🎉</span>
+          <h2 class="card-event-name">Recepción</h2>
+          <p class="card-time">5:00 PM</p>
+          <p class="card-address">Alcocer, calle real #44</p>
+          <a class="btn-map" href="https://maps.app.goo.gl/Ux4d2Q52fRvwCPDu5" target="_blank" rel="noopener noreferrer"
+            id="btn-map-recepcion" aria-label="Ver ubicación de la Recepción en Google Maps">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+            </svg>
+            Ver Ubicación
+          </a>
+        </div>
+
+      </div>
+
+      <div class="guestbook-section fade-up" id="guestbook-section">
+
+        <div id="gb-locked" class="gb-locked-state">
+          <svg viewBox="0 0 24 24" width="42" height="42" class="lock-icon">
+            <path
+              d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"
+              fill="currentColor" />
+          </svg>
+          <h3 class="locked-title">Sorpresa en Espera</h3>
+          <p class="locked-phrase">"Los instantes más hermosos merecen ser capturados en el momento perfecto.
+            Acompáñanos a la recepción a las 5:00 PM para revelar este espacio y dejar tu huella en nuestra historia."
+          </p>
+        </div>
+
+        <div id="gb-unlocked" class="gb-unlocked-state" style="display: none;">
+          <p class="itinerario-title">Libro de Firmas</p>
+          <p class="rsvp-text">Tómate una foto en la fiesta y déjale un mensaje a Andrea</p>
+
+          <form id="form-firmas" class="guestbook-form">
+            <input type="text" id="gb-nombre" placeholder="Tu familia o nombre" required />
+            <textarea id="gb-mensaje" placeholder="Escribe tus felicitaciones aquí..." rows="3" required></textarea>
+
+            <label for="gb-foto" class="btn-upload">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+                <path
+                  d="M4 4h3l2-2h6l2 2h3c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 3c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z" />
+              </svg>
+              Tomar foto
+            </label>
+            <input type="file" id="gb-foto" accept="image/*" capture="environment" style="display: none;" required />
+            <span id="foto-nombre" class="foto-status">Ninguna foto seleccionada</span>
+
+            <button type="submit" class="btn-submit" id="btn-enviar-gb">Enviar Mensaje</button>
+          </form>
+        </div>
+
+      </div>
+
+      <div class="album-section fade-up" id="album-section" style="display: none;">
+        <p class="itinerario-title">✦ Nuestros Recuerdos ✦</p>
+        <p class="rsvp-text">Gracias por compartir esta noche inolvidable</p>
+
+        <div id="album-grid" class="album-grid">
+          <p class="cargando-texto" id="cargando-album">Revelando fotografías...</p>
+        </div>
       </div>
 
     </div>
+    <div class="floral-border floral-border-bottom" id="border-bottom">
+      <img src="floressinfondo.png" alt="Flores decorativas" loading="lazy" width="100%" />
+    </div>
 
-  </div><div class="floral-border floral-border-bottom" id="border-bottom">
-    <img src="floressinfondo.png" alt="Flores decorativas" loading="lazy" width="100%" />
   </div>
+  <script>
+    // =============================================================
+    // GSAP — Professional Animation Sistema
+    // =============================================================
+    gsap.registerPlugin(ScrollTrigger);
 
-</div><script>
-  // =============================================================
-  // GSAP — Professional Animation Sistema
-  // =============================================================
-  gsap.registerPlugin(ScrollTrigger);
+    gsap.defaults({ ease: 'power3.out', overwrite: 'auto' });
 
-  gsap.defaults({ ease: 'power3.out', overwrite: 'auto' });
+    // ---- Create sparkle particles ----
+    (function createSparkles() {
+      const container = document.getElementById('sparkles');
+      for (let i = 0; i < 18; i++) {
+        const el = document.createElement('div');
+        el.className = 'sparkle';
+        el.style.setProperty('--dur', (3 + Math.random() * 5) + 's');
+        el.style.setProperty('--delay', (Math.random() * 5) + 's');
+        el.style.left = (5 + Math.random() * 90) + '%';
+        el.style.top = (5 + Math.random() * 90) + '%';
+        const s = 2 + Math.random() * 5;
+        el.style.width = s + 'px';
+        el.style.height = s + 'px';
+        container.appendChild(el);
+      }
+    })();
 
-  // ---- Create sparkle particles ----
-  (function createSparkles() {
-    const container = document.getElementById('sparkles');
-    for (let i = 0; i < 18; i++) {
-      const el = document.createElement('div');
-      el.className = 'sparkle';
-      el.style.setProperty('--dur',   (3 + Math.random() * 5) + 's');
-      el.style.setProperty('--delay', (Math.random() * 5) + 's');
-      el.style.left   = (5 + Math.random() * 90) + '%';
-      el.style.top    = (5 + Math.random() * 90) + '%';
-      const s = 2 + Math.random() * 5;
-      el.style.width  = s + 'px';
-      el.style.height = s + 'px';
-      container.appendChild(el);
-    }
-  })();
+    // ---- Floating hearts ----
+    (function createHearts() {
+      const container = document.getElementById('hearts-bg');
+      const symbols = ['♡', '❧', '✾', '✦', '♥'];
+      for (let i = 0; i < 10; i++) {
+        const el = document.createElement('div');
+        el.className = 'heart-float';
+        el.textContent = symbols[i % symbols.length];
+        el.style.setProperty('--fup', (6 + Math.random() * 8) + 's');
+        el.style.setProperty('--fd', (Math.random() * 10) + 's');
+        el.style.left = (5 + Math.random() * 90) + '%';
+        el.style.bottom = '-20px';
+        el.style.fontSize = (10 + Math.random() * 10) + 'px';
+        container.appendChild(el);
+      }
+    })();
 
-  // ---- Floating hearts ----
-  (function createHearts() {
-    const container = document.getElementById('hearts-bg');
-    const symbols   = ['♡', '❧', '✾', '✦', '♥'];
-    for (let i = 0; i < 10; i++) {
-      const el  = document.createElement('div');
-      el.className  = 'heart-float';
-      el.textContent = symbols[i % symbols.length];
-      el.style.setProperty('--fup', (6 + Math.random() * 8) + 's');
-      el.style.setProperty('--fd',  (Math.random() * 10) + 's');
-      el.style.left     = (5 + Math.random() * 90) + '%';
-      el.style.bottom   = '-20px';
-      el.style.fontSize = (10 + Math.random() * 10) + 'px';
-      container.appendChild(el);
-    }
-  })();
+    // =============================================================
+    // ENTRADA + ANIMACIONES
+    // =============================================================
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motionOk = !prefersReduced;
+    const spd = motionOk ? 1 : 0;
 
-  // =============================================================
-  // ENTRADA + ANIMACIONES
-  // =============================================================
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const motionOk = !prefersReduced;
-  const spd = motionOk ? 1 : 0; 
+    const entranceTL = gsap.timeline({
+      defaults: { ease: 'power3.out', overwrite: 'auto' }
+    });
 
-  const entranceTL = gsap.timeline({
-    defaults: { ease: 'power3.out', overwrite: 'auto' }
-  });
-
-  entranceTL
-    .fromTo('#border-top',
-      { y: -50, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
-      0
-    )
-    .fromTo('#name-andrea',
-      { y: 28, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 1.1 || 0.01, ease: 'back.out(1.7)' },
-      spd * 0.3
-    )
-    .fromTo('#subtitle-xv',
-      { y: 18, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 0.8 || 0.01 },
-      '<0.25'
-    )
-    .fromTo('#date-block',
-      { y: 22, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 0.9 || 0.01, ease: 'back.out(1.4)' },
-      '<0.2'
-    )
-    .fromTo('#misa-section',
-      { y: 16, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 0.75 || 0.01 },
-      '<0.2'
-    )
-    .fromTo('#ornament-1',
-      { scaleX: 0, autoAlpha: 0 },
-      { scaleX: 1, autoAlpha: 1, duration: spd * 0.5 || 0.01, ease: 'power2.inOut' },
-      '<0.15'
-    )
-    .fromTo('#families-section > *',
-      { y: 14, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 0.65 || 0.01,
-        stagger: { each: spd * 0.12 || 0, from: 'start' } },
-      '<0.2'
-    )
-    .fromTo('.count-unit',
-      { y: 18, autoAlpha: 0, scale: 0.88 },
-      { y: 0, autoAlpha: 1, scale: 1, duration: spd * 0.6 || 0.01,
-        ease: 'back.out(1.6)', stagger: { each: spd * 0.08 || 0, from: 'start' } },
-      '<0.3'
-    )
-    .fromTo('#itinerario-title',
-      { y: 12, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 0.6 || 0.01 },
-      '<0.2'
-    )
-    .fromTo('#border-bottom',
-      { y: 40, autoAlpha: 0 },
-      { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
-      '<0.15'
-    );
-
-  // ITINERARY CARDS
-  ScrollTrigger.batch('.event-card', {
-    start: 'top 88%',
-    once: true,
-    onEnter: (elements) => {
-      gsap.fromTo(elements,
-        { y: 55, autoAlpha: 0, scale: 0.92 },
+    entranceTL
+      .fromTo('#border-top',
+        { y: -50, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
+        0
+      )
+      .fromTo('#name-andrea',
+        { y: 28, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: spd * 1.1 || 0.01, ease: 'back.out(1.7)' },
+        spd * 0.3
+      )
+      .fromTo('#subtitle-xv',
+        { y: 18, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: spd * 0.8 || 0.01 },
+        '<0.25'
+      )
+      .fromTo('#date-block',
+        { y: 22, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: spd * 0.9 || 0.01, ease: 'back.out(1.4)' },
+        '<0.2'
+      )
+      .fromTo('#misa-section',
+        { y: 16, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: spd * 0.75 || 0.01 },
+        '<0.2'
+      )
+      .fromTo('#ornament-1',
+        { scaleX: 0, autoAlpha: 0 },
+        { scaleX: 1, autoAlpha: 1, duration: spd * 0.5 || 0.01, ease: 'power2.inOut' },
+        '<0.15'
+      )
+      .fromTo('#families-section > *',
+        { y: 14, autoAlpha: 0 },
         {
-          y: 0, autoAlpha: 1, scale: 1,
-          duration: motionOk ? 0.85 : 0.01,
-          ease: 'back.out(1.7)',
-          stagger: { each: 0.2, from: 'start' },
-        }
+          y: 0, autoAlpha: 1, duration: spd * 0.65 || 0.01,
+          stagger: { each: spd * 0.12 || 0, from: 'start' }
+        },
+        '<0.2'
+      )
+      .fromTo('.count-unit',
+        { y: 18, autoAlpha: 0, scale: 0.88 },
+        {
+          y: 0, autoAlpha: 1, scale: 1, duration: spd * 0.6 || 0.01,
+          ease: 'back.out(1.6)', stagger: { each: spd * 0.08 || 0, from: 'start' }
+        },
+        '<0.3'
+      )
+      .fromTo('#itinerario-title',
+        { y: 12, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: spd * 0.6 || 0.01 },
+        '<0.2'
+      )
+      .fromTo('#border-bottom',
+        { y: 40, autoAlpha: 0 },
+        { y: 0, autoAlpha: 1, duration: spd * 1 || 0.01, ease: 'power2.out' },
+        '<0.15'
       );
-    },
-  });
 
-  // FLORES ANIMADAS
-  if (motionOk) {
-    gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: 'sine.inOut' } })
-      .to('#border-top img', { y: -10, duration: 3.8 })
-      .to('#border-top img', { y:  -4, duration: 2.5 })
-      .to('#border-top img', { y: -12, duration: 4.2 });
-
-    gsap.timeline({ repeat: -1, yoyo: true, delay: 0.8, defaults: { ease: 'sine.inOut' } })
-      .to('#border-top img', { x: 10, rotation:  0.4, duration: 4.5 })
-      .to('#border-top img', { x: -6, rotation: -0.3, duration: 3.8 })
-      .to('#border-top img', { x:  8, rotation:  0.5, duration: 5.0 });
-
-    gsap.to('#border-top', {
-      scaleY: 1.04, duration: 4.5, ease: 'sine.inOut',
-      repeat: -1, yoyo: true, transformOrigin: 'top center', delay: 1,
+    // ITINERARY CARDS
+    ScrollTrigger.batch('.event-card', {
+      start: 'top 88%',
+      once: true,
+      onEnter: (elements) => {
+        gsap.fromTo(elements,
+          { y: 55, autoAlpha: 0, scale: 0.92 },
+          {
+            y: 0, autoAlpha: 1, scale: 1,
+            duration: motionOk ? 0.85 : 0.01,
+            ease: 'back.out(1.7)',
+            stagger: { each: 0.2, from: 'start' },
+          }
+        );
+      },
     });
 
-    gsap.timeline({ repeat: -1, yoyo: true, delay: 1.5, defaults: { ease: 'sine.inOut' } })
-      .to('#border-bottom', { y:  8, duration: 4.0 })
-      .to('#border-bottom', { y:  3, duration: 2.8 })
-      .to('#border-bottom', { y: 10, duration: 4.8 });
+    // FLORES ANIMADAS
+    if (motionOk) {
+      gsap.timeline({ repeat: -1, yoyo: true, defaults: { ease: 'sine.inOut' } })
+        .to('#border-top img', { y: -10, duration: 3.8 })
+        .to('#border-top img', { y: -4, duration: 2.5 })
+        .to('#border-top img', { y: -12, duration: 4.2 });
 
-    gsap.timeline({ repeat: -1, yoyo: true, delay: 0.4, defaults: { ease: 'sine.inOut' } })
-      .to('#border-bottom img', { x:  -8, duration: 5.0 })
-      .to('#border-bottom img', { x:   5, duration: 3.5 })
-      .to('#border-bottom img', { x: -10, duration: 5.5 });
+      gsap.timeline({ repeat: -1, yoyo: true, delay: 0.8, defaults: { ease: 'sine.inOut' } })
+        .to('#border-top img', { x: 10, rotation: 0.4, duration: 4.5 })
+        .to('#border-top img', { x: -6, rotation: -0.3, duration: 3.8 })
+        .to('#border-top img', { x: 8, rotation: 0.5, duration: 5.0 });
 
-    gsap.to('#border-bottom', {
-      scaleY: 1.04, duration: 5, ease: 'sine.inOut',
-      repeat: -1, yoyo: true, transformOrigin: 'bottom center', delay: 2,
-    });
-  }
+      gsap.to('#border-top', {
+        scaleY: 1.04, duration: 4.5, ease: 'sine.inOut',
+        repeat: -1, yoyo: true, transformOrigin: 'top center', delay: 1,
+      });
 
-  // HOVER CARDS
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    document.querySelectorAll('.event-card').forEach(card => {
-      card.addEventListener('mouseenter', () =>
-        gsap.to(card, { scale: 1.025, y: -3, duration: 0.22, ease: 'power2.out', overwrite: true })
-      );
-      card.addEventListener('mouseleave', () =>
-        gsap.to(card, { scale: 1, y: 0, duration: 0.22, ease: 'power2.inOut', overwrite: true })
-      );
-    });
-  }
+      gsap.timeline({ repeat: -1, yoyo: true, delay: 1.5, defaults: { ease: 'sine.inOut' } })
+        .to('#border-bottom', { y: 8, duration: 4.0 })
+        .to('#border-bottom', { y: 3, duration: 2.8 })
+        .to('#border-bottom', { y: 10, duration: 4.8 });
 
-  // COUNTDOWN
-  function updateCountdown() {
-    const target = new Date('2026-05-16T15:00:00');
-    const diff   = target - new Date();
+      gsap.timeline({ repeat: -1, yoyo: true, delay: 0.4, defaults: { ease: 'sine.inOut' } })
+        .to('#border-bottom img', { x: -8, duration: 5.0 })
+        .to('#border-bottom img', { x: 5, duration: 3.5 })
+        .to('#border-bottom img', { x: -10, duration: 5.5 });
 
-    if (diff <= 0) {
-      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach((id, i) =>
-        document.getElementById(id).textContent = i === 0 ? 'Hoy' : 'Listo'
-      );
-      return;
+      gsap.to('#border-bottom', {
+        scaleY: 1.04, duration: 5, ease: 'sine.inOut',
+        repeat: -1, yoyo: true, transformOrigin: 'bottom center', delay: 2,
+      });
     }
 
-    const pad  = n => String(n).padStart(2, '0');
-    const days  = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const mins  = Math.floor((diff % 3600000)  / 60000);
-    const secs  = Math.floor((diff % 60000)    / 1000);
-
-    document.getElementById('cd-days').textContent  = days;
-    document.getElementById('cd-hours').textContent = pad(hours);
-    document.getElementById('cd-mins').textContent  = pad(mins);
-    document.getElementById('cd-secs').textContent  = pad(secs);
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  // ===========================================================
-  // CONTROL DE TIEMPO DEL LIBRO DE FIRMAS
-  // ===========================================================
-  function checkGuestbookStatus() {
-    const lockedDiv   = document.getElementById('gb-locked');
-    const unlockedDiv = document.getElementById('gb-unlocked');
-    if (!lockedDiv || !unlockedDiv) return;
-
-    // Fecha real objetivo: 16 de Mayo de 2026 a las 17:00:00
-    const unlockTime = new Date('2026-05-16T17:00:00').getTime();
-    const now = new Date().getTime();
-
-    if (now >= unlockTime) {
-      lockedDiv.style.display   = 'none';
-      unlockedDiv.style.display = 'block';
-      initGuestbookListeners();
-    } else {
-      lockedDiv.style.display   = 'block';
-      unlockedDiv.style.display = 'none';
+    // HOVER CARDS
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      document.querySelectorAll('.event-card').forEach(card => {
+        card.addEventListener('mouseenter', () =>
+          gsap.to(card, { scale: 1.025, y: -3, duration: 0.22, ease: 'power2.out', overwrite: true })
+        );
+        card.addEventListener('mouseleave', () =>
+          gsap.to(card, { scale: 1, y: 0, duration: 0.22, ease: 'power2.inOut', overwrite: true })
+        );
+      });
     }
-  }
 
-  // Comprobar al cargar y cada minuto (por si alguien deja la página abierta)
-  checkGuestbookStatus();
-  setInterval(checkGuestbookStatus, 60000);
+    // COUNTDOWN
+    function updateCountdown() {
+      const target = new Date('2026-05-16T15:00:00');
+      const diff = target - new Date();
 
-  // ===========================================================
-  // GUESTBOOK (LIBRO DE FIRMAS) LOGIC — solo se activa al desbloquear
-  // ===========================================================
-  let guestbookReady = false;
-  function initGuestbookListeners() {
-    if (guestbookReady) return;   // evitar registrar listeners duplicados
-    guestbookReady = true;
+      if (diff <= 0) {
+        ['cd-days', 'cd-hours', 'cd-mins', 'cd-secs'].forEach((id, i) =>
+          document.getElementById(id).textContent = i === 0 ? 'Hoy' : 'Listo'
+        );
+        return;
+      }
 
-    const SCRIPT_URL  = "https://script.google.com/macros/s/AKfycbxb50jg9yqQ_YWeEI5LndBMmbV-n6j7yjOPAkvCpe_nVEjemM-VbXQmQChvezumKdgB/exec";
-    const formFirmas  = document.getElementById('form-firmas');
-    const fileInput   = document.getElementById('gb-foto');
-    const statusTexto = document.getElementById('foto-nombre');
-    const btnEnviar   = document.getElementById('btn-enviar-gb');
+      const pad = n => String(n).padStart(2, '0');
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
 
-    if (!formFirmas || !fileInput) return;
+      document.getElementById('cd-days').textContent = days;
+      document.getElementById('cd-hours').textContent = pad(hours);
+      document.getElementById('cd-mins').textContent = pad(mins);
+      document.getElementById('cd-secs').textContent = pad(secs);
+    }
 
-    fileInput.addEventListener('change', () => {
-      if (fileInput.files.length > 0) {
-        statusTexto.textContent = "Foto lista para enviar";
-        statusTexto.style.color = "green";
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // ===========================================================
+    // CONTROL DE TIEMPO DEL LIBRO DE FIRMAS
+    // ===========================================================
+    function checkGuestbookStatus() {
+      const lockedDiv = document.getElementById('gb-locked');
+      const unlockedDiv = document.getElementById('gb-unlocked');
+      if (!lockedDiv || !unlockedDiv) return;
+
+      // PRUEBA: cambia esta fecha a la real del evento cuando termines de probar
+      // Fecha real: new Date('2026-05-16T17:00:00')
+      const unlockTime = new Date('2026-04-03T16:00:00').getTime();
+      const now = new Date().getTime();
+
+      if (now >= unlockTime) {
+        lockedDiv.style.display = 'none';
+        unlockedDiv.style.display = 'block';
+        initGuestbookListeners();
       } else {
-        statusTexto.textContent = "Ninguna foto seleccionada";
-        statusTexto.style.color = "var(--text-light)";
+        lockedDiv.style.display = 'block';
+        unlockedDiv.style.display = 'none';
       }
-    });
+    }
 
-    const fileToBase64 = (file) => new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload  = () => resolve(reader.result);
-      reader.onerror = (error) => reject(error);
-    });
+    // Comprobar al cargar y cada minuto (por si alguien deja la página abierta)
+    checkGuestbookStatus();
+    setInterval(checkGuestbookStatus, 60000);
 
-    formFirmas.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      btnEnviar.textContent = "Enviando...";
-      btnEnviar.disabled    = true;
+    // ===========================================================
+    // GUESTBOOK (LIBRO DE FIRMAS) LOGIC — solo se activa al desbloquear
+    // ===========================================================
+    let guestbookReady = false;
+    function initGuestbookListeners() {
+      if (guestbookReady) return;   // evitar registrar listeners duplicados
+      guestbookReady = true;
 
-      try {
-        const nombre  = document.getElementById('gb-nombre').value;
-        const mensaje = document.getElementById('gb-mensaje').value;
-        let fotoBase64 = null;
+      const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb50jg9yqQ_YWeEI5LndBMmbV-n6j7yjOPAkvCpe_nVEjemM-VbXQmQChvezumKdgB/exec";
+      const formFirmas = document.getElementById('form-firmas');
+      const fileInput = document.getElementById('gb-foto');
+      const statusTexto = document.getElementById('foto-nombre');
+      const btnEnviar = document.getElementById('btn-enviar-gb');
+
+      if (!formFirmas || !fileInput) return;
+
+      fileInput.addEventListener('change', () => {
         if (fileInput.files.length > 0) {
-          fotoBase64 = await fileToBase64(fileInput.files[0]);
+          statusTexto.textContent = "Foto lista para enviar";
+          statusTexto.style.color = "green";
+        } else {
+          statusTexto.textContent = "Ninguna foto seleccionada";
+          statusTexto.style.color = "var(--text-light)";
+        }
+      });
+
+      const fileToBase64 = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+
+      formFirmas.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btnEnviar.textContent = "Enviando...";
+        btnEnviar.disabled = true;
+
+        try {
+          const nombre = document.getElementById('gb-nombre').value;
+          const mensaje = document.getElementById('gb-mensaje').value;
+          let fotoBase64 = null;
+          if (fileInput.files.length > 0) {
+            fotoBase64 = await fileToBase64(fileInput.files[0]);
+          }
+
+          await fetch(SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre, mensaje, fotoBase64 })
+          });
+
+          alert("Mensaje enviado correctamente. Gracias por compartir este momento.");
+          formFirmas.reset();
+          statusTexto.textContent = "Ninguna foto seleccionada";
+          statusTexto.style.color = "var(--text-light)";
+        } catch (error) {
+          alert("Hubo un error al enviar. Por favor intenta de nuevo.");
+          console.error(error);
+        } finally {
+          btnEnviar.textContent = "Enviar Mensaje";
+          btnEnviar.disabled = false;
+        }
+      });
+    }
+
+    if (window.gsap && window.ScrollTrigger) {
+      gsap.from('#guestbook-section', {
+        y: 40, autoAlpha: 0, duration: 0.8,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '#guestbook-section',
+          start: 'top 85%',
+          once: true,
+        }
+      });
+    }
+
+    // ===========================================================
+    // REVELADO DEL ÁLBUM (9:00 PM)
+    // ===========================================================
+    const ALBUM_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb50jg9yqQ_YWeEI5LndBMmbV-n6j7yjOPAkvCpe_nVEjemM-VbXQmQChvezumKdgB/exec";
+
+    // Helper: crea y anima una tarjeta polaroid en el grid
+    function renderPolaroid(grid, item, index) {
+      const card = document.createElement('div');
+      card.className = 'polaroid';
+
+      card.innerHTML = `
+        <img src="${item.foto}" alt="Foto de ${item.nombre}" loading="lazy" />
+        <p class="polaroid-text">"${item.mensaje}"</p>
+        <p class="polaroid-author">— ${item.nombre}</p>
+      `;
+
+      grid.appendChild(card);
+
+      if (window.gsap) {
+        gsap.from(card, {
+          y: 30, autoAlpha: 0,
+          duration: 0.6, delay: index * 0.09,
+          ease: 'back.out(1.5)'
+        });
+      }
+    }
+
+    async function cargarAlbum() {
+      const grid = document.getElementById('album-grid');
+      try {
+        const response = await fetch(ALBUM_SCRIPT_URL);
+        const data = await response.json();
+
+        if (data.result === 'success' && data.data.length > 0) {
+          grid.innerHTML = '';
+          data.data.forEach((item, index) => renderPolaroid(grid, item, index));
+        } else {
+          grid.innerHTML = '<p class="cargando-texto">Aún no hay fotos en el álbum. ¡Sé el primero en el Libro de Firmas!</p>';
+        }
+      } catch (error) {
+        console.error('Error cargando el álbum:', error);
+        grid.innerHTML = '<p class="cargando-texto">Hubo un problema al revelar las fotos.</p>';
+      }
+    }
+
+    let albumCargado = false;
+    function checkAlbumStatus() {
+      const albumSection = document.getElementById('album-section');
+      if (!albumSection) return;
+
+      // PRUEBA: cambia esta fecha a la real del evento cuando termines de probar
+      // Fecha real: new Date('2026-05-16T21:00:00')
+      const revealTime = new Date('2026-04-03T16:00:00').getTime();
+      const now = new Date().getTime();
+
+      if (now >= revealTime && !albumCargado) {
+        albumCargado = true;
+        albumSection.style.display = 'block';
+
+        // AnimaR entrada de la sección con GSAP si está cargado
+        if (window.gsap && window.ScrollTrigger) {
+          gsap.from('#album-section', {
+            y: 40, autoAlpha: 0, duration: 0.9,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: '#album-section',
+              start: 'top 88%',
+              once: true,
+            }
+          });
         }
 
-        await fetch(SCRIPT_URL, {
-          method:  'POST',
-          mode:    'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ nombre, mensaje, fotoBase64 })
-        });
+        cargarAlbum();
+      }
+    }
 
-        alert("Mensaje enviado correctamente. Gracias por compartir este momento.");
-        formFirmas.reset();
-        statusTexto.textContent = "Ninguna foto seleccionada";
-        statusTexto.style.color = "var(--text-light)";
-      } catch (error) {
-        alert("Hubo un error al enviar. Por favor intenta de nuevo.");
-        console.error(error);
-      } finally {
-        btnEnviar.textContent = "Enviar Mensaje";
-        btnEnviar.disabled    = false;
-      }
-    });
-  }
-  
-  if (window.gsap && window.ScrollTrigger) {
-    gsap.from('#guestbook-section', {
-      y: 40, autoAlpha: 0, duration: 0.8,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: '#guestbook-section',
-        start: 'top 85%',
-        once: true,
-      }
-    });
-  }
-</script>
+    // Comprobar al cargar y cada minuto
+    checkAlbumStatus();
+    setInterval(checkAlbumStatus, 60000);
+  </script>
 </body>
+
 </html>
