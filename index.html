@@ -536,6 +536,38 @@
       box-shadow: 0 4px 12px rgba(107, 45, 107, 0.2);
     }
 
+    /* ===== ESTADO BLOQUEADO ===== */
+    .gb-locked-state {
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px dashed rgba(195, 155, 195, 0.8);
+      border-radius: 16px;
+      padding: 36px 20px;
+      text-align: center;
+      box-shadow: 0 4px 16px rgba(107, 45, 107, 0.05);
+      transition: all 0.5s ease;
+    }
+    .lock-icon {
+      color: var(--purple-mid);
+      margin-bottom: 16px;
+      opacity: 0.85;
+    }
+    .locked-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: var(--purple-deep);
+      margin-bottom: 12px;
+    }
+    .locked-phrase {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--text-body);
+      line-height: 1.6;
+      padding: 0 10px;
+    }
+
     /* ===== RSVP FOOTER ===== */
     .rsvp-text {
       font-family: 'Cormorant Garamond', serif;
@@ -729,25 +761,39 @@
         </a>
       </div>
 
-    </div><div class="guestbook-section fade-up" id="guestbook-section">
-      <p class="itinerario-title">Libro de Firmas</p>
-      <p class="rsvp-text">Tómate una foto en la fiesta y déjale un mensaje a Andrea</p>
-      
-      <form id="form-firmas" class="guestbook-form">
-        <input type="text" id="gb-nombre" placeholder="Tu familia o nombre" required />
-        <textarea id="gb-mensaje" placeholder="Escribe tus felicitaciones aquí..." rows="3" required></textarea>
-        
-        <label for="gb-foto" class="btn-upload">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
-            <path d="M4 4h3l2-2h6l2 2h3c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 3c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/>
-          </svg>
-          Tomar foto
-        </label>
-        <input type="file" id="gb-foto" accept="image/*" capture="environment" style="display: none;" required />
-        <span id="foto-nombre" class="foto-status">Ninguna foto seleccionada</span>
+    </div>
 
-        <button type="submit" class="btn-submit" id="btn-enviar-gb">Enviar Mensaje</button>
-      </form>
+    <div class="guestbook-section fade-up" id="guestbook-section">
+      
+      <div id="gb-locked" class="gb-locked-state">
+        <svg viewBox="0 0 24 24" width="42" height="42" class="lock-icon">
+          <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z" fill="currentColor"/>
+        </svg>
+        <h3 class="locked-title">Sorpresa en Espera</h3>
+        <p class="locked-phrase">"Los instantes más hermosos merecen ser capturados en el momento perfecto. Acompáñanos a la recepción a las 5:00 PM para revelar este espacio y dejar tu huella en nuestra historia."</p>
+      </div>
+
+      <div id="gb-unlocked" class="gb-unlocked-state" style="display: none;">
+        <p class="itinerario-title">Libro de Firmas</p>
+        <p class="rsvp-text">Tómate una foto en la fiesta y déjale un mensaje a Andrea</p>
+        
+        <form id="form-firmas" class="guestbook-form">
+          <input type="text" id="gb-nombre" placeholder="Tu familia o nombre" required />
+          <textarea id="gb-mensaje" placeholder="Escribe tus felicitaciones aquí..." rows="3" required></textarea>
+          
+          <label for="gb-foto" class="btn-upload">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+              <path d="M4 4h3l2-2h6l2 2h3c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm8 3c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8c-1.65 0-3-1.35-3-3s1.35-3 3-3 3 1.35 3 3-1.35 3-3 3z"/>
+            </svg>
+            Tomar foto
+          </label>
+          <input type="file" id="gb-foto" accept="image/*" capture="environment" style="display: none;" required />
+          <span id="foto-nombre" class="foto-status">Ninguna foto seleccionada</span>
+
+          <button type="submit" class="btn-submit" id="btn-enviar-gb">Enviar Mensaje</button>
+        </form>
+      </div>
+
     </div>
 
   </div><div class="floral-border floral-border-bottom" id="border-bottom">
@@ -951,68 +997,97 @@
   setInterval(updateCountdown, 1000);
 
   // ===========================================================
-  // GUESTBOOK (LIBRO DE FIRMAS) LOGIC
+  // CONTROL DE TIEMPO DEL LIBRO DE FIRMAS
   // ===========================================================
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb50jg9yqQ_YWeEI5LndBMmbV-n6j7yjOPAkvCpe_nVEjemM-VbXQmQChvezumKdgB/exec";
-  const formFirmas = document.getElementById('form-firmas');
-  const fileInput = document.getElementById('gb-foto');
-  const statusTexto = document.getElementById('foto-nombre');
-  const btnEnviar = document.getElementById('btn-enviar-gb');
+  function checkGuestbookStatus() {
+    const lockedDiv   = document.getElementById('gb-locked');
+    const unlockedDiv = document.getElementById('gb-unlocked');
+    if (!lockedDiv || !unlockedDiv) return;
 
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files.length > 0) {
-      statusTexto.textContent = "Foto lista para enviar";
-      statusTexto.style.color = "green";
+    // Fecha real objetivo: 16 de Mayo de 2026 a las 17:00:00
+    const unlockTime = new Date('2026-05-16T17:00:00').getTime();
+    const now = new Date().getTime();
+
+    if (now >= unlockTime) {
+      lockedDiv.style.display   = 'none';
+      unlockedDiv.style.display = 'block';
+      initGuestbookListeners();
     } else {
-      statusTexto.textContent = "Ninguna foto seleccionada";
-      statusTexto.style.color = "var(--text-light)";
+      lockedDiv.style.display   = 'block';
+      unlockedDiv.style.display = 'none';
     }
-  });
+  }
 
-  const fileToBase64 = (file) => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
+  // Comprobar al cargar y cada minuto (por si alguien deja la página abierta)
+  checkGuestbookStatus();
+  setInterval(checkGuestbookStatus, 60000);
 
-  formFirmas.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    btnEnviar.textContent = "Enviando...";
-    btnEnviar.disabled = true;
+  // ===========================================================
+  // GUESTBOOK (LIBRO DE FIRMAS) LOGIC — solo se activa al desbloquear
+  // ===========================================================
+  let guestbookReady = false;
+  function initGuestbookListeners() {
+    if (guestbookReady) return;   // evitar registrar listeners duplicados
+    guestbookReady = true;
 
-    try {
-      const nombre = document.getElementById('gb-nombre').value;
-      const mensaje = document.getElementById('gb-mensaje').value;
-      let fotoBase64 = null;
+    const SCRIPT_URL  = "https://script.google.com/macros/s/AKfycbxb50jg9yqQ_YWeEI5LndBMmbV-n6j7yjOPAkvCpe_nVEjemM-VbXQmQChvezumKdgB/exec";
+    const formFirmas  = document.getElementById('form-firmas');
+    const fileInput   = document.getElementById('gb-foto');
+    const statusTexto = document.getElementById('foto-nombre');
+    const btnEnviar   = document.getElementById('btn-enviar-gb');
 
+    if (!formFirmas || !fileInput) return;
+
+    fileInput.addEventListener('change', () => {
       if (fileInput.files.length > 0) {
-        fotoBase64 = await fileToBase64(fileInput.files[0]);
+        statusTexto.textContent = "Foto lista para enviar";
+        statusTexto.style.color = "green";
+      } else {
+        statusTexto.textContent = "Ninguna foto seleccionada";
+        statusTexto.style.color = "var(--text-light)";
       }
+    });
 
-      const data = { nombre, mensaje, fotoBase64 };
+    const fileToBase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload  = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
 
-      await fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+    formFirmas.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      btnEnviar.textContent = "Enviando...";
+      btnEnviar.disabled    = true;
 
-      alert("Mensaje enviado correctamente. Gracias por compartir este momento.");
-      formFirmas.reset();
-      statusTexto.textContent = "Ninguna foto seleccionada";
-      statusTexto.style.color = "var(--text-light)";
-      
-    } catch (error) {
-      alert("Hubo un error al enviar. Por favor intenta de nuevo.");
-      console.error(error);
-    } finally {
-      btnEnviar.textContent = "Enviar Mensaje";
-      btnEnviar.disabled = false;
-    }
-  });
+      try {
+        const nombre  = document.getElementById('gb-nombre').value;
+        const mensaje = document.getElementById('gb-mensaje').value;
+        let fotoBase64 = null;
+        if (fileInput.files.length > 0) {
+          fotoBase64 = await fileToBase64(fileInput.files[0]);
+        }
+
+        await fetch(SCRIPT_URL, {
+          method:  'POST',
+          mode:    'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body:    JSON.stringify({ nombre, mensaje, fotoBase64 })
+        });
+
+        alert("Mensaje enviado correctamente. Gracias por compartir este momento.");
+        formFirmas.reset();
+        statusTexto.textContent = "Ninguna foto seleccionada";
+        statusTexto.style.color = "var(--text-light)";
+      } catch (error) {
+        alert("Hubo un error al enviar. Por favor intenta de nuevo.");
+        console.error(error);
+      } finally {
+        btnEnviar.textContent = "Enviar Mensaje";
+        btnEnviar.disabled    = false;
+      }
+    });
+  }
   
   if (window.gsap && window.ScrollTrigger) {
     gsap.from('#guestbook-section', {
