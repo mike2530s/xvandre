@@ -873,6 +873,41 @@
       transition: background 0.2s;
     }
     .lightbox-close:hover { background: rgba(255,255,255,0.3); }
+
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-size: 26px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.15s;
+      user-select: none;
+    }
+    .lb-nav:hover  { background: rgba(255,255,255,0.3); transform: translateY(-50%) scale(1.1); }
+    .lb-nav:active { transform: translateY(-50%) scale(0.94); }
+    #lb-prev { left: 12px; }
+    #lb-next { right: 12px; }
+    .lb-counter {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 2px;
+    }
+    .lightbox-img.lb-fade { opacity: 0; transform: scale(0.93); }
+    .lightbox-img { transition: opacity 0.2s ease, transform 0.2s ease; }
     .polaroid { cursor: pointer; }
 
     @media (min-width: 481px) {
@@ -1058,6 +1093,10 @@
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.defaults({ ease: 'power3.out', overwrite: 'auto' });
+
+    // Variables globales — declaradas aquí para evitar Temporal Dead Zone
+    let _lbItems = [];   // fotos del lightbox
+    let _lbIndex = 0;    // índice actual
 
     // 1. INTENSIFICADO: Destellos (Sparkles)
     (function createSparkles() {
@@ -1382,7 +1421,7 @@
     // ===========================================================
     const ALBUM_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxb50jg9yqQ_YWeEI5LndBMmbV-n6j7yjOPAkvCpe_nVEjemM-VbXQmQChvezumKdgB/exec";
 
-    // Helper: crea y anima una tarjeta polaroid en el grid
+    // Helper: crea y anima una tarjeta polaroid — efecto "tirar sobre la mesa"
     function renderPolaroid(grid, item, index) {
       const card = document.createElement('div');
       card.className = 'polaroid';
@@ -1396,23 +1435,42 @@
       grid.appendChild(card);
 
       if (window.gsap) {
-        gsap.from(card, {
-          y: 30, autoAlpha: 0,
-          duration: 0.6, delay: index * 0.09,
-          ease: 'back.out(1.5)'
-        });
+        // Rotación final: misma lógica que el CSS nth-child
+        const n = index + 1;
+        const finalRot = (n % 3 === 0) ? -1 : (n % 2 === 0) ? 2.5 : -2;
+
+        // Posición inicial aleatoria: arriba y a los lados
+        const startX   = (Math.random() - 0.5) * 480;   // −240 a +240 px
+        const startY   = -(180 + Math.random() * 220);   // −180 a −400 px arriba
+        const startRot = (Math.random() - 0.5) * 70;     // −35 a +35 grados
+
+        gsap.fromTo(card,
+          { x: startX, y: startY, rotation: startRot, scale: 0.4, autoAlpha: 0 },
+          {
+            x: 0, y: 0, rotation: finalRot, scale: 1, autoAlpha: 1,
+            duration: 0.85,
+            delay: index * 0.13,
+            ease: 'back.out(1.6)',
+            // Al terminar, quitar inline transforms → el hover CSS funciona normal
+            onComplete() { gsap.set(card, { clearProps: 'x,y,scale' }); }
+          }
+        );
       }
 
-      // Abrir lightbox al hacer clic
+      // Registrar en el array global del lightbox
+      if (window._lbRegister) window._lbRegister(item);
+
+      // Abrir lightbox al hacer clic (pasa index para que prev/next funcionen)
       card.addEventListener('click', () => {
         if (window._openLightbox) {
-          window._openLightbox(item.foto, item.mensaje, item.nombre);
+          window._openLightbox(item.foto, item.mensaje, item.nombre, index);
         }
       });
     }
 
     async function cargarAlbum() {
       const grid = document.getElementById('album-grid');
+      _lbItems = []; // limpiar para evitar duplicados si se recarga
       try {
         const response = await fetch(ALBUM_SCRIPT_URL);
         const data = await response.json();
@@ -1465,8 +1523,32 @@
     setInterval(checkAlbumStatus, 60000);
 
     // ===========================================================
-    // LIGHTBOX — inicialización lazy (los divs vienen DESPUÉS del script)
+    // LIGHTBOX con navegación prev/next + swipe táctil + teclado
     // ===========================================================
+    // (_lbItems y _lbIndex están declaradas arriba del script)
+
+    function _lbShow(index) {
+      const lb      = document.getElementById('lightbox');
+      const lbImg   = document.getElementById('lb-img');
+      const lbMsg   = document.getElementById('lb-msg');
+      const lbAuth  = document.getElementById('lb-author');
+      const counter = document.getElementById('lb-counter');
+      if (!lb || !_lbItems.length) return;
+
+      _lbIndex = ((index % _lbItems.length) + _lbItems.length) % _lbItems.length;
+      const item = _lbItems[_lbIndex];
+
+      // Transición rápida fade
+      lbImg.classList.add('lb-fade');
+      setTimeout(() => {
+        lbImg.src          = item.foto;
+        lbMsg.textContent  = '"' + item.mensaje + '"';
+        lbAuth.textContent = '— ' + item.nombre;
+        counter.textContent = (_lbIndex + 1) + ' / ' + _lbItems.length;
+        lbImg.classList.remove('lb-fade');
+      }, 180);
+    }
+
     function closeLightbox() {
       const lb = document.getElementById('lightbox');
       if (!lb) return;
@@ -1478,28 +1560,56 @@
       }, 320);
     }
 
-    function openLightbox(src, mensaje, nombre) {
-      const lb     = document.getElementById('lightbox');
-      const lbImg  = document.getElementById('lb-img');
-      const lbMsg  = document.getElementById('lb-msg');
-      const lbAuth = document.getElementById('lb-author');
-      const lbClose= document.getElementById('lb-close');
+    function openLightbox(src, mensaje, nombre, index) {
+      const lb      = document.getElementById('lightbox');
+      const lbImg   = document.getElementById('lb-img');
+      const lbMsg   = document.getElementById('lb-msg');
+      const lbAuth  = document.getElementById('lb-author');
+      const lbClose = document.getElementById('lb-close');
+      const lbPrev  = document.getElementById('lb-prev');
+      const lbNext  = document.getElementById('lb-next');
+      const counter = document.getElementById('lb-counter');
       if (!lb || !lbImg) return;
 
+      _lbIndex = index ?? 0;
       lbImg.src          = src;
       lbMsg.textContent  = '"' + mensaje + '"';
       lbAuth.textContent = '— ' + nombre;
-      lb.style.display   = 'flex';
-      lb.offsetHeight;                       // forzar reflujo
+      counter.textContent = (_lbIndex + 1) + ' / ' + _lbItems.length;
+
+      lb.style.display = 'flex';
+      lb.offsetHeight;
       lb.classList.add('show');
 
-      // Handlers de cierre (se asignan aquí para garantizar que existen)
-      lb.onclick    = (e) => { if (e.target === lb)   closeLightbox(); };
+      // Cierre
+      lb.onclick      = (e) => { if (e.target === lb) closeLightbox(); };
       lbClose.onclick = () => closeLightbox();
+      lbPrev.onclick  = (e) => { e.stopPropagation(); _lbShow(_lbIndex - 1); };
+      lbNext.onclick  = (e) => { e.stopPropagation(); _lbShow(_lbIndex + 1); };
     }
 
-    // Disponible globalmente para renderPolaroid — se asigna de inmediato
-    window._openLightbox = openLightbox;
+    // Teclado: ← → Esc
+    document.addEventListener('keydown', (e) => {
+      const lb = document.getElementById('lightbox');
+      if (!lb || lb.style.display === 'none') return;
+      if (e.key === 'ArrowRight') _lbShow(_lbIndex + 1);
+      if (e.key === 'ArrowLeft')  _lbShow(_lbIndex - 1);
+      if (e.key === 'Escape')     closeLightbox();
+    });
+
+    // Swipe táctil para móvil
+    let _touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { _touchStartX = e.touches[0].clientX; }, { passive: true });
+    document.addEventListener('touchend',   (e) => {
+      const lb = document.getElementById('lightbox');
+      if (!lb || lb.style.display === 'none') return;
+      const diff = _touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? _lbShow(_lbIndex + 1) : _lbShow(_lbIndex - 1);
+    }, { passive: true });
+
+    // Disponible globalmente para renderPolaroid
+    window._openLightbox  = openLightbox;
+    window._lbRegister    = (item) => _lbItems.push(item);  // registra cada foto
   </script>
   <div id="custom-alert" class="custom-alert-overlay" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="alert-title-el">
     <div class="custom-alert-box">
@@ -1512,12 +1622,15 @@
 
   <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox-overlay" style="display:none;" aria-modal="true" role="dialog">
-    <button id="lb-close" class="lightbox-close" aria-label="Cerrar">×</button>
+    <button id="lb-close" class="lightbox-close" aria-label="Cerrar">&times;</button>
+    <button id="lb-prev"  class="lb-nav" aria-label="Anterior">&#8592;</button>
     <img id="lb-img" class="lightbox-img" src="" alt="Foto" />
+    <button id="lb-next"  class="lb-nav" aria-label="Siguiente">&#8594;</button>
     <div class="lightbox-caption">
       <p class="lightbox-msg" id="lb-msg"></p>
       <p class="lightbox-author" id="lb-author"></p>
     </div>
+    <span class="lb-counter" id="lb-counter"></span>
   </div>
 </body>
 
