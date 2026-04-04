@@ -1465,33 +1465,40 @@
     setInterval(checkAlbumStatus, 60000);
 
     // ===========================================================
-    // LIGHTBOX — abrir foto grande al hacer clic en una polaroid
+    // LIGHTBOX — inicialización lazy (los divs vienen DESPUÉS del script)
     // ===========================================================
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lb-img');
-    const lbMsg = document.getElementById('lb-msg');
-    const lbAuthor = document.getElementById('lb-author');
+    function closeLightbox() {
+      const lb = document.getElementById('lightbox');
+      if (!lb) return;
+      lb.classList.remove('show');
+      setTimeout(() => {
+        lb.style.display = 'none';
+        const img = document.getElementById('lb-img');
+        if (img) img.src = '';
+      }, 320);
+    }
 
     function openLightbox(src, mensaje, nombre) {
-      lbImg.src = src;
-      lbMsg.textContent = '"' + mensaje + '"';
-      lbAuthor.textContent = '— ' + nombre;
-      lb.style.display = 'flex';
-      lb.offsetHeight;
+      const lb     = document.getElementById('lightbox');
+      const lbImg  = document.getElementById('lb-img');
+      const lbMsg  = document.getElementById('lb-msg');
+      const lbAuth = document.getElementById('lb-author');
+      const lbClose= document.getElementById('lb-close');
+      if (!lb || !lbImg) return;
+
+      lbImg.src          = src;
+      lbMsg.textContent  = '"' + mensaje + '"';
+      lbAuth.textContent = '— ' + nombre;
+      lb.style.display   = 'flex';
+      lb.offsetHeight;                       // forzar reflujo
       lb.classList.add('show');
+
+      // Handlers de cierre (se asignan aquí para garantizar que existen)
+      lb.onclick    = (e) => { if (e.target === lb)   closeLightbox(); };
+      lbClose.onclick = () => closeLightbox();
     }
 
-    function closeLightbox() {
-      lb.classList.remove('show');
-      setTimeout(() => { lb.style.display = 'none'; lbImg.src = ''; }, 300);
-    }
-
-    lb.addEventListener('click', (e) => {
-      if (e.target === lb) closeLightbox();
-    });
-    document.getElementById('lb-close').addEventListener('click', closeLightbox);
-
-    // Exponer para que renderPolaroid lo use
+    // Disponible globalmente para renderPolaroid — se asigna de inmediato
     window._openLightbox = openLightbox;
   </script>
   <div id="custom-alert" class="custom-alert-overlay" style="display: none;" aria-modal="true" role="dialog" aria-labelledby="alert-title-el">
