@@ -881,9 +881,9 @@
       background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.3);
       color: #fff;
-      font-size: 26px;
-      width: 44px;
-      height: 44px;
+      font-size: 20px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
@@ -1068,15 +1068,31 @@
             <button type="submit" class="btn-submit" id="btn-enviar-gb">Enviar Mensaje</button>
           </form>
         </div>
-
-      </div>
-
-      <div class="album-section fade-up" id="album-section" style="display: none;">
+<div class="album-section fade-up" id="album-section" style="display: none;">
         <p class="itinerario-title">✦ Nuestros Recuerdos ✦</p>
-        <p class="rsvp-text">Gracias por compartir esta noche inolvidable</p>
 
-        <div id="album-grid" class="album-grid">
-          <p class="cargando-texto" id="cargando-album">Revelando fotografías...</p>
+        <!-- ESTADO BLOQUEADO: visible de 5 PM a 9 PM -->
+        <div id="album-locked" style="display: none; text-align: center; padding: 32px 20px;">
+          <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.7;">📸</div>
+          <p style="font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(18px, 5vw, 22px); color: var(--purple-deep); margin-bottom: 12px;">
+            Esta noche, los recuerdos cobrarán vida
+          </p>
+          <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15px; color: var(--text-light); line-height: 1.6; margin-bottom: 20px; padding: 0 10px;">
+            Comparte tus fotos con nosotros y vuelve a las
+          </p>
+          <p style="font-family: 'Great Vibes', cursive; font-size: 38px; color: var(--gold); letter-spacing: 2px; line-height: 1;">9:00 PM</p>
+          <p style="font-family: 'Montserrat', sans-serif; font-size: 11px; color: var(--text-light); text-transform: uppercase; letter-spacing: 2px; margin-top: 6px;">
+            para ver el álbum de la noche
+          </p>
+          <div style="margin-top: 20px; font-size: 22px; opacity: 0.5; letter-spacing: 6px;">✦ ✦ ✦</div>
+        </div>
+
+        <!-- ESTADO DESBLOQUEADO: visible después de 9 PM -->
+        <div id="album-content" style="display: none;">
+          <p class="rsvp-text">Gracias por compartir esta noche inolvidable</p>
+          <div id="album-grid" class="album-grid">
+            <p class="cargando-texto" id="cargando-album">Revelando fotografías...</p>
+          </div>
         </div>
       </div>
 
@@ -1302,9 +1318,8 @@
       const unlockedDiv = document.getElementById('gb-unlocked');
       if (!lockedDiv || !unlockedDiv) return;
 
-      // PRUEBA: cambia esta fecha a la real del evento cuando termines de probar
-      // Fecha real: new Date('2026-05-16T17:00:00')
-      const unlockTime = new Date('2026-04-03T16:00:00').getTime();
+      // Fecha real del evento: 16 de Mayo de 2026 a las 17:00:00
+      const unlockTime = new Date('2026-05-16T17:00:00').getTime();
       const now = new Date().getTime();
 
       if (now >= unlockTime) {
@@ -1489,22 +1504,33 @@
 
     let albumCargado = false;
     function checkAlbumStatus() {
-      const albumSection = document.getElementById('album-section');
+      const albumSection  = document.getElementById('album-section');
+      const albumLocked   = document.getElementById('album-locked');
+      const albumContent  = document.getElementById('album-content');
       if (!albumSection) return;
 
-      // PRUEBA: cambia esta fecha a la real del evento cuando termines de probar
-      // Fecha real: new Date('2026-05-16T21:00:00')
-      const revealTime = new Date('2026-04-03T16:00:00').getTime();
+      const unlockTime = new Date('2026-05-16T17:00:00').getTime(); // 5 PM — aparece teaser
+      const revealTime = new Date('2026-05-16T21:00:00').getTime(); // 9 PM — fotos reales
       const now = new Date().getTime();
 
-      if (now >= revealTime && !albumCargado) {
+      if (now < unlockTime) {
+        // Antes de las 5 PM — sección oculta
+        albumSection.style.display = 'none';
+      } else if (now < revealTime) {
+        // Entre 5 PM y 9 PM — mostrar teaser de espera
+        albumSection.style.display = 'block';
+        albumLocked.style.display  = 'block';
+        albumContent.style.display = 'none';
+      } else if (!albumCargado) {
+        // A partir de las 9 PM — revelar fotos reales
         albumCargado = true;
         albumSection.style.display = 'block';
+        albumLocked.style.display  = 'none';
+        albumContent.style.display = 'block';
 
-        // AnimaR entrada de la sección con GSAP si está cargado
         if (window.gsap && window.ScrollTrigger) {
-          gsap.from('#album-section', {
-            y: 40, autoAlpha: 0, duration: 0.9,
+          gsap.from('#album-content', {
+            y: 30, autoAlpha: 0, duration: 0.9,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: '#album-section',
