@@ -1323,7 +1323,7 @@
       if (!lockedDiv || !unlockedDiv) return;
 
       // Fecha real del evento: 16 de Mayo de 2026 a las 17:00:00
-      const unlockTime = new Date('2020-05-16T17:00:00').getTime(); // Cambiado a 2020 para pruebas
+      const unlockTime = new Date('2026-05-16T17:00:00').getTime();
       const now = new Date().getTime();
 
       if (now >= unlockTime) {
@@ -1513,8 +1513,8 @@
       const albumContent  = document.getElementById('album-content');
       if (!albumSection) return;
 
-      const unlockTime = new Date('2020-05-16T17:00:00').getTime(); // 5 PM — aparece teaser
-      const revealTime = new Date('2020-05-16T21:00:00').getTime(); // 9 PM — fotos reales
+      const unlockTime = new Date('2026-05-16T17:00:00').getTime(); // 5 PM — aparece teaser
+      const revealTime = new Date('2026-05-16T21:00:00').getTime(); // 9 PM — fotos reales
       const now = new Date().getTime();
 
       if (now < unlockTime) {
